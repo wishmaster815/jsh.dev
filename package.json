@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "gate": "npm run typecheck && npm run lint && npm run build"
+    "check:keys": "node scripts/check-duplicate-keys.mjs",
+    "gate": "npm run typecheck && npm run lint && npm run build && npm run check:keys"
   },
   "dependencies": {
     "next": "16.3.7",

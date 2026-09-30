@@ -28,9 +28,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    /**
+     * suppressHydrationWarning is required, not cosmetic.
+     *
+     * ThemeScript sets `data-theme` on <html> before first paint, which is the
+     * only way to avoid a flash of the wrong theme. The server cannot know the
+     * stored preference, so it renders no attribute — and React's client render
+     * therefore expects none either. Without this, hydration reports a mismatch
+     * for every visitor who has a theme stored.
+     *
+     * The DOM is already correct before React runs, so there is nothing to
+     * patch: the attribute is intentionally left as the script set it.
+     */
     <html
       lang="en"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${sora.variable} ${plexMono.variable} h-full antialiased`}
     >
       <head>

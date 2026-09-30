@@ -70,8 +70,8 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
         </p>
 
         <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-step--1 text-muted">
-          {project.stack.map((item) => (
-            <li key={item}>{item}</li>
+          {project.stack.map((item, i) => (
+            <li key={i}>{item}</li>
           ))}
         </ul>
 
@@ -94,9 +94,9 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
               Options weighed
             </p>
             <ul className="mt-3 flex flex-col gap-2">
-              {decision.options.map((option) => (
+              {decision.options.map((option, i) => (
                 <li
-                  key={option}
+                  key={i}
                   className="flex gap-3 text-step--1 text-pretty"
                 >
                   <span
@@ -136,8 +136,8 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
 
         <Block heading="Outcome">
           <dl className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
-            {project.outcomes.map((outcome) => (
-              <div key={outcome.metric} className="crop bg-surface p-5">
+            {project.outcomes.map((outcome, i) => (
+              <div key={i} className="crop bg-surface p-5">
                 <dt className="text-step-4 leading-none tracking-[-0.01em]">
                   {outcome.metric}
                 </dt>

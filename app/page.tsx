@@ -149,8 +149,10 @@ export default function Home() {
                   {layer.built}
                 </p>
                 <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-step--2 text-muted sm:col-span-3">
-                  {layer.tools.map((tool) => (
-                    <li key={tool}>{tool}</li>
+                  {/* Index keys: these are plain strings with no stable id, and
+                      the list is static, so index is correct and cannot collide. */}
+                  {layer.tools.map((tool, i) => (
+                    <li key={i}>{tool}</li>
                   ))}
                 </ul>
               </li>
@@ -198,8 +200,8 @@ export default function Home() {
                   </div>
 
                   <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line pt-5 sm:grid-cols-4">
-                    {project.outcomes.map((outcome) => (
-                      <div key={outcome.metric}>
+                    {project.outcomes.map((outcome, i) => (
+                      <div key={i}>
                         <dt className="text-step-1 leading-tight">
                           {outcome.metric}
                         </dt>

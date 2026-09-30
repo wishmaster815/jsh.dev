@@ -82,6 +82,15 @@ for a meaningful control boundary without re-checking contrast.
   - no `filter: invert()` — both palettes are designed deliberately
   - verify contrast in **both** themes
 - **375px, both themes, and keyboard-only are gates**, not later polish.
+- **`suppressHydrationWarning` on `<html>` is required, not cosmetic.** The
+  pre-paint theme script sets `data-theme` before first paint, which is the only
+  way to avoid a flash of the wrong theme. The server cannot know the stored
+  preference, so it renders no attribute and React's client render expects none
+  either. Removing the prop reintroduces a hydration mismatch for every visitor
+  with a stored theme.
+- **List keys must be index-based or a genuinely unique id.** Placeholder data
+  repeating a string (two `"TODO"` entries) collides React keys. `npm run
+  check:keys` runs inside `npm run gate` to catch this.
 
 ## Quality gate — in order, every step
 

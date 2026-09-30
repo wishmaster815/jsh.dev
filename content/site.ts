@@ -38,7 +38,7 @@ export const site: Site = {
       name: "Interface",
       owns: "What the user touches, and how fast it responds.",
       built: "TODO — one concrete thing built here.",
-      tools: ["TODO", "TypeScript", "TODO"],
+      tools: ["TODO — framework", "TypeScript", "TODO — styling"],
       depth: 1,
     },
     {
@@ -46,7 +46,7 @@ export const site: Site = {
       name: "API",
       owns: "Contracts, validation, auth, and the error paths.",
       built: "TODO — one concrete thing built here.",
-      tools: ["TODO", "REST", "TODO"],
+      tools: ["TODO — framework", "REST", "TODO — validation"],
       depth: 2,
     },
     {
@@ -54,7 +54,7 @@ export const site: Site = {
       name: "Data",
       owns: "Schemas, migrations, queries, and what happens when they are wrong.",
       built: "TODO — one concrete thing built here.",
-      tools: ["TODO", "SQL", "TODO"],
+      tools: ["TODO — database", "SQL", "TODO — migrations"],
       depth: 3,
     },
     {
@@ -62,7 +62,7 @@ export const site: Site = {
       name: "Systems",
       owns: "Deploys, queues, observability, and cost.",
       built: "TODO — one concrete thing built here.",
-      tools: ["TODO", "Docker", "TODO"],
+      tools: ["Docker", "TODO — CI", "TODO — monitoring"],
       depth: 4,
     },
   ],
