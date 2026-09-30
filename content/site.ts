@@ -213,9 +213,9 @@ export const projects: Project[] = [
             "LLM APIs",
         ],
 
-        source: "https://github.com/wishmaster815/agent-dock",
+        source: "https://github.com/wishmaster815/AgentDock",
 
-        screenshot: "/projects/agentdock.png",
+        screenshot: "/projects/agent.png",
 
         featured: true,
 
@@ -227,28 +227,36 @@ export const projects: Project[] = [
         name: "PadhAI",
 
         summary:
-            "A production-ready school ERP for managing academics and classrooms",
+            "A production-ready school ERP for managing academics, classrooms, and students",
 
         description:
-            "A full-stack school management platform connecting admins, teachers, and students through role-based workflows — from school and class management to teacher-led classrooms and student learning modules.",
+            "A full-stack school management platform built for real-world deployment, connecting administrators, teachers, and students through role-based workflows — from school and class management to digital classrooms and teacher-created learning modules.",
 
         features: [
             "Role-based admin, teacher, and student access",
-            "School, class, section, and subject management",
-            "Teacher-managed classrooms and learning modules",
-            "Student access to teacher-created content",
+            "School, class, section, subject, and classroom management",
+            "Teacher-created modules and learning content",
+            "Student access to classes and teacher content",
+            "Administrative controls for managing the school",
         ],
 
         problem:
-            "Schools often use disconnected tools for administration, teaching, and student learning. PadhAI brings these workflows into one platform built for real-world school deployment.",
+            "Schools need one system to manage administration, academics, teachers, classrooms, and students. PadhAI brings these workflows together in a single platform designed to be delivered to and used by real schools.",
 
         stack: [
-            // Add your actual stack
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "ShadCN UI",
+            "FastAPI",
+            "PostgreSQL",
+            "Supabase",
+            "AI/LLM APIs",
         ],
 
-
         screenshot: "/projects/padhai.png",
-
+        source: "https://github.com/wishmaster815/PadhAI-backend",
+        live: "https://padhai-rosy.vercel.app",
         featured: true,
 
         year: "2026",
@@ -268,7 +276,8 @@ export const projects: Project[] = [
         problem:
             "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
         stack: ["Next.js", "LangChain", "Python", "OpenAI"],
-        source: "https://github.com/wishmaster815/Birju-Frontend-2",
+        source: "https://github.com/wishmaster815/Birju.AI-v2",
+        live: "https://birju-ai-olive.vercel.app",
         screenshot: "/projects/birju-ai.png",
         featured: true,
         year: "2025",
@@ -303,6 +312,7 @@ export const projects: Project[] = [
         ],
 
         source: "https://github.com/wishmaster815/DocuMind-AI",
+        live: "https://documind-ai-815.vercel.app",
 
         screenshot: "/projects/documind.png",
 

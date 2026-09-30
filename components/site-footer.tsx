@@ -29,8 +29,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mx-auto max-w-6xl px-[var(--gutter)]">
-      <div className="mt-[var(--section-gap)] flex flex-col items-center gap-4 border-t border-line py-9 text-center">
+    <footer className="mx-auto max-w-6xl px-(--gutter)">
+      <div className="mt-(--section-gap) flex flex-col items-center gap-4 border-t border-line py-9 text-center">
         {/* <p className="label max-w-[52ch] text-pretty">
           Built with modern web technologies and a focus on clean and performant
           code
