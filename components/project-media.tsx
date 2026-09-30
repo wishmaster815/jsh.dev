@@ -41,15 +41,18 @@ export function ProjectMedia({
       ) : null}
 
       {/*
-        Scrim. Screenshots are mostly light application chrome, so a weak fade
-        leaves the title sitting on white pixels. This is nearly opaque at the
-        bottom where the text is and clear by the middle, which keeps the
-        screenshot visible while making the text readable.
-      */}
-      <div className="absolute inset-0 bg-linear-to-t from-panel from-35% via-panel/80 via-65% to-transparent" />
+        Scrim. Kept light on purpose: the title has its own near-opaque panel
+        block, so this only has to seat that block against the bottom edge. A
+        heavy scrim on top of it double-darkened every screenshot, which made a
+        dark-themed app like AgentDock indistinguishable from the card behind it.
 
-      {/* A hairline under the text block, to lift it off a busy UI. */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-line" />
+        This is also what carries a dark screenshot, which is why the media area
+        gets a hairline edge below.
+      */}
+      <div className="absolute inset-0 bg-linear-to-t from-panel/85 from-15% via-panel/20 via-55% to-transparent" />
+
+      {/* A visible edge, so a dark screenshot still reads as an image. */}
+      <div className="pointer-events-none absolute inset-0 rounded-t-[13px] ring-1 ring-inset ring-line/70" />
     </div>
   );
 }
