@@ -2,7 +2,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { Terminal } from "@/components/terminal";
-import { experience, featuredProjects, journal, site } from "@/content/site";
+import {
+  experience,
+  extraProjects,
+  featuredProjects,
+  journal,
+  site,
+} from "@/content/site";
 
 const EDGE: Record<1 | 2 | 3 | 4, string> = {
   1: "bg-layer-1",
@@ -225,6 +231,37 @@ export default function Home() {
           </ul>
         </Section>
 
+        {/* Everything not promoted to the three featured entries. */}
+        {extraProjects.length > 0 ? (
+          <Section
+            id="more-work"
+            title="More work"
+            datum="16%"
+            lede="Smaller builds, kept here rather than padded into the three above."
+          >
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {extraProjects.map((project) => (
+                <li key={project.slug}>
+                  <Link
+                    href={`/work/${project.slug}`}
+                    className="crop group block h-full bg-surface p-5 transition-colors duration-200 hover:bg-raised"
+                  >
+                    <h3 className="text-step-1 leading-snug group-hover:text-accent">
+                      {project.name}
+                    </h3>
+                    <p className="mt-1 font-mono text-step--1 text-muted">
+                      {project.year}
+                    </p>
+                    <p className="mt-3 text-step--1 text-pretty">
+                      {project.summary}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        ) : null}
+
         {/* ------------------------------------------------------------------
             How I work — the reasoning showcase, and the only content a
             competitor cannot copy.
@@ -277,7 +314,12 @@ export default function Home() {
           </ul>
         </Section>
 
-        <Section id="experience" title="Experience" datum="28%">
+        <Section
+          id="experience"
+          title="Experience"
+          datum="28%"
+          lede="Three internships across ML, civic infrastructure, and client design work."
+        >
           <ul className="flex flex-col">
             {experience.map((item) => (
               <li
@@ -291,6 +333,63 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="max-w-[var(--measure)] text-pretty">
+                  {item.detail}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* Education sits high deliberately: for a fresher, recruiters filter on
+            degree and graduation year before reading anything else. */}
+        <Section
+          id="education"
+          title="Education"
+          datum="22%"
+          lede="Degree and where it was studied."
+        >
+          <ul className="flex flex-col">
+            {site.education.map((item) => (
+              <li
+                key={`${item.institution}-${item.degree}`}
+                className="grid gap-x-8 gap-y-2 border-b border-line py-6 first:pt-0 last:border-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]"
+              >
+                <div>
+                  <p className="text-step-1 leading-snug">{item.degree}</p>
+                  <p className="mt-1 font-mono text-step--1 text-muted">
+                    {item.institution} — {item.period}
+                  </p>
+                </div>
+                {item.detail ? (
+                  <p className="max-w-[var(--measure)] text-pretty">
+                    {item.detail}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* Practice is checkable evidence. Anyone can open the link and verify
+            it, which is worth more than a claimed skill level. */}
+        <Section
+          id="practice"
+          title="Practice"
+          datum="14%"
+          lede="Problem solving outside the projects. These links are checkable."
+        >
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {site.practice.map((item) => (
+              <li key={item.platform} className="crop bg-surface p-5">
+                <a
+                  href={item.href}
+                  rel="me noopener noreferrer"
+                  target="_blank"
+                  className="link-rule text-step-1 text-accent"
+                >
+                  {item.platform}
+                </a>
+                <p className="mt-2 text-step--1 text-muted text-pretty">
                   {item.detail}
                 </p>
               </li>

@@ -74,6 +74,26 @@ export type Experience = {
   detail: string;
 };
 
+export type Education = {
+  degree: string;
+  institution: string;
+  period: string;
+  detail?: string;
+};
+
+/**
+ * Practice and problem solving.
+ *
+ * Carries its own weight for a fresher: LeetCode and GeeksforGeeks profiles are
+ * checkable evidence of consistency, which a reader can verify rather than take
+ * on trust.
+ */
+export type Practice = {
+  platform: string;
+  href: string;
+  detail: string;
+};
+
 /**
  * A layer of the stack.
  *
@@ -109,4 +129,6 @@ export type Site = {
   /** Measured stats for the hero metadata grid. Empty until real. */
   stats: { label: string; value: string }[];
   stack: StackLayer[];
+  education: Education[];
+  practice: Practice[];
 };

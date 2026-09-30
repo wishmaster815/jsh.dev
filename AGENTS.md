@@ -67,8 +67,17 @@ for a meaningful control boundary without re-checking contrast.
 
 ## Hard boundaries
 
-- **Never read, copy, or migrate anything from Portfolio V1.** Independent
-  project — do not open it even for reference.
+- **Portfolio V1 is a content source only.** Revised by the user: V1 may be read
+  for **real facts and section naming** — projects, education, achievements,
+  contact details, measured numbers. Take the *content*, not the *code*.
+  - Never copy or migrate V1's code, components, styles, or layout structure.
+  - Re-derive sectioning against the current positioning rather than inheriting
+    V1's, since V1 was built for a different claim and may carry patterns this
+    project already rejected.
+  - V1 is not committed to this repository. If files are ever placed here, they
+    belong in a gitignored folder.
+  - **Never invent facts to fill a gap.** If V1 does not supply a real number,
+    leave it `TODO` and ask.
 - **No AI features.** Chat, retrieval, assistant, grounding: all removed. Read
   `PLAN.md` §12 (Rejected directions) before proposing anything similar.
 - Positioning is **backend and AI systems engineer**, AI as a domain of work

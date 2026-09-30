@@ -2,9 +2,10 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV = [
-  { href: "/#stack", label: "Stack" },
   { href: "/#work", label: "Work" },
-  { href: "/#approach", label: "Approach" },
+  { href: "/#stack", label: "Stack" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#education", label: "Education" },
   { href: "/#contact", label: "Contact" },
 ];
 
