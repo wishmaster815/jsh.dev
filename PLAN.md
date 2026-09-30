@@ -285,7 +285,7 @@ strings, numbered section markers, and `→` appended to link text.
 - **Prevent the flash of wrong theme.** An inline blocking script in `<head>`
   reads the stored preference before first paint. Most commonly missed step, and
   immediately visible to any dark-mode user.
-- **Three states, not two:** system / light / dark. A two-state toggle forces
+- **Two states, light and dark:** system / light / dark. A two-state toggle forces
   users to override their OS.
 - **Neither theme is an inversion of the other.** `filter: invert()` wrecks
   images, logos, and brand colour. Both palettes are designed deliberately.

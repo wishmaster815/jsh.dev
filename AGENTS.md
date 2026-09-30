@@ -87,9 +87,17 @@ for a meaningful control boundary without re-checking contrast.
   - tokens via CSS custom properties from the first line, no raw hex in components
   - `color-scheme` set alongside the tokens
   - inline pre-paint script in `<head>` prevents the wrong-theme flash
-  - three states (system / light / dark), not two
   - no `filter: invert()` — both palettes are designed deliberately
   - verify contrast in **both** themes
+  - **two states only, light and dark. There is no "system" option.** Dark is
+    the default (`DEFAULT_THEME`), because the site is dark-first by design, so
+    a visitor on a light OS still sees dark until they choose otherwise. The
+    pre-paint script must therefore **always** write `data-theme`, falling back
+    to `dark`; it used to write nothing and let a `prefers-color-scheme` media
+    query decide, and that query is now deleted, so an unset attribute would
+    leave the first painted frame undefined. If "system" is ever reintroduced,
+    the `prefers-color-scheme` block has to come back with it, and so does the
+    OS-change listener.
 - **375px, both themes, and keyboard-only are gates**, not later polish.
 - **`suppressHydrationWarning` on `<html>` is required, not cosmetic.** The
   pre-paint theme script sets `data-theme` before first paint, which is the only
