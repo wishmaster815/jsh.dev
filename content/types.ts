@@ -96,7 +96,7 @@ export type ContactLink = {
   href: string;
   /** One line on what the link is for. */
   note: string;
-  icon: "github" | "linkedin" | "mail";
+  icon: "github" | "linkedin" | "x" | "mail";
 };
 
 export type Site = {

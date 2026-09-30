@@ -65,6 +65,14 @@ export function MailIcon({ className = "size-4" }: { className?: string }) {
   );
 }
 
+export function XIcon({ className = "size-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12.6 1.5h2.3l-5 5.7 5.9 7.8h-4.6l-3.6-4.7-4.1 4.7H1.2l5.4-6.1L1 1.5h4.7l3.3 4.3 3.6-4.3Zm-.8 12.1h1.3L4.2 2.8H2.8l9 10.8Z" />
+    </svg>
+  );
+}
+
 export function SunIcon({ className = "size-4" }: { className?: string }) {
   return (
     <svg

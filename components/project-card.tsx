@@ -4,12 +4,14 @@ import {
   GitHubIcon,
   LinkedInIcon,
   MailIcon,
+  XIcon,
 } from "./icons";
 import type { ContactLink, Project } from "@/content/types";
 
 const ICON = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
+  x: XIcon,
   mail: MailIcon,
 } as const;
 
