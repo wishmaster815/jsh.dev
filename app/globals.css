@@ -382,6 +382,61 @@ body {
   animation: pulse 2.4s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   Scroll reveal
+
+   One subtle lift, once, when content first enters the viewport. Not the
+   usual fade-and-slide-up on every element — children stagger by index so a
+   group arrives as a single gesture rather than a queue.
+   ========================================================================== */
+
+.reveal > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 520ms cubic-bezier(0.16, 0.84, 0.44, 1),
+    transform 520ms cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+.reveal.is-shown > * {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-shown > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal.is-shown > *:nth-child(2) {
+  transition-delay: 70ms;
+}
+.reveal.is-shown > *:nth-child(3) {
+  transition-delay: 140ms;
+}
+.reveal.is-shown > *:nth-child(4) {
+  transition-delay: 210ms;
+}
+.reveal.is-shown > *:nth-child(5) {
+  transition-delay: 280ms;
+}
+.reveal.is-shown > *:nth-child(6) {
+  transition-delay: 350ms;
+}
+
+/* Reading progress across the top of the viewport. Functional, not decorative:
+   it answers "how much is left" on a single-page site. */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--head);
+  pointer-events: none;
+}
+
 .enter {
   opacity: 0;
   animation: rise 600ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
@@ -499,6 +554,11 @@ body {
 
   .head-rule {
     transform: scaleX(1);
+  }
+
+  .reveal > * {
+    opacity: 1;
+    transform: none;
   }
 
   .head-mark::after {

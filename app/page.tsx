@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { ContactRow, ProjectCard } from "@/components/project-card";
+import { CopyEmail } from "@/components/copy-email";
+import { Reveal } from "@/components/reveal";
+import { ScrollProgress, SECTIONS } from "@/components/scroll-progress";
 import { SiteFooter } from "@/components/site-footer";
 import { Terminal } from "@/components/terminal";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -33,12 +36,14 @@ function Section({
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="mt-[var(--section-gap)] scroll-mt-10"
+      className="mt-(--section-gap) scroll-mt-10"
     >
       <h2 id={`${id}-heading`} className="sec-label">
         /{label}
       </h2>
-      <div className="mt-[var(--block-gap)]">{children}</div>
+      <Reveal>
+        <div className="mt-(--block-gap)">{children}</div>
+      </Reveal>
     </section>
   );
 }
@@ -53,7 +58,9 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-        <header className="mx-auto max-w-6xl px-[var(--gutter)] pt-7">
+        <ScrollProgress targets={SECTIONS} />
+
+        <header className="mx-auto max-w-6xl px-(--gutter) pt-7">
           <div className="flex items-center justify-between gap-6">
             <Link
               href="/"
@@ -81,7 +88,7 @@ export default function Home() {
           <div className="head-rule mt-5 h-px bg-line" />
         </header>
 
-        <main className="mx-auto max-w-6xl px-[var(--gutter)]">
+        <main className="mx-auto max-w-6xl px-(--gutter)">
           {/* ================= Hero ================= */}
           <section className="pt-10 sm:pt-14">
             <p className="enter enter-1 flex items-center gap-2 text-step--1 text-muted">
@@ -125,7 +132,7 @@ export default function Home() {
                   {site.about.body.map((para) => (
                     <p
                       key={para.slice(0, 24)}
-                      className="max-w-[var(--measure)] text-step-0 text-muted text-pretty"
+                      className="max-w-(--measure) text-step-0 text-muted text-pretty"
                     >
                       {para}
                     </p>
@@ -236,13 +243,17 @@ export default function Home() {
           <Section id="contact" label="contact">
             <div className="grid gap-x-10 gap-y-8 lg:grid-cols-2">
               <div>
-                <h3 className="text-step-6 leading-[1.05] font-bold tracking-[-0.025em] text-text text-balance">
+                <h3 className="text-step-6 leading-[1.05] font-bold tracking-tight text-text text-balance">
                   Let&apos;s work together
                 </h3>
                 <p className="mt-5 max-w-[46ch] text-step-0 text-muted text-pretty">
                   Have an opportunity or project in mind? Send a quick message —
                   I usually respond within 24 hours.
                 </p>
+
+                <div className="mt-6">
+                  <CopyEmail email={site.email} />
+                </div>
 
                 <ul className="mt-7 flex flex-col gap-3">
                   {site.contact.map((item) => (

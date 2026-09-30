@@ -46,6 +46,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <ThemeScript />
+        {/*
+          Scroll-reveal starts its children at opacity 0 and reveals them from
+          JavaScript. Without this, a visitor whose script fails or is blocked
+          would see four empty sections. Pin everything visible when scripting
+          is off.
+        */}
+        <noscript>
+          <style>{`.reveal > * { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
