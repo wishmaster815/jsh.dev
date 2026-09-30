@@ -39,11 +39,20 @@ constraint of this project:
 
 ## 02 — Positioning
 
-**Jayesh is a backend and AI systems engineer.**
+**Jayesh is a full stack engineer.**
 
-AI is a *domain he works in*, not the theme of the site. Several projects are AI
-projects and they get full case studies, but the site's identity is systems
-thinking, which covers RAG, agents, backend, and infrastructure with one story.
+Revised from "backend and AI systems engineer" at the user's request. The
+through-line is unchanged — systems thinking, depth of reasoning over breadth of
+tooling — but the claim is now breadth across the stack rather than depth in one
+layer.
+
+**Caveat, recorded deliberately:** "full stack" is a weaker positioning claim
+than "backend and AI systems engineer" was. It describes range rather than
+specialism, and it is close to table stakes. The site offsets this by showing the
+stack as *layers with real responsibilities* rather than a list of technologies —
+naming tools argues nothing, whereas owning a layer and knowing what breaks in it
+argues capability. Revisit the positioning if the work turns out to be genuinely
+backend-weighted.
 
 ### Why not "AI-native"
 
@@ -53,8 +62,8 @@ gimmick-driven design the brief warns against.
 
 ### Positioning line
 
-> Backend and AI systems engineer. Here's the reasoning, the tradeoffs, and what
-> broke.
+> Full stack engineer. I build across the stack — interfaces, APIs, and the data
+> and infrastructure underneath.
 
 This is a direction, not final copy. Copy must be specific and defensible — no
 skills lists, no "passionate developer."
@@ -107,16 +116,24 @@ and footer, since recruiters leave wherever they are.
 
 ## 05 — Home page sections
 
-1. **Hero** — name, one-line position, availability status, two CTAs
-   (View work / Contact), resume link
-2. **Selected Work** — 3 projects maximum. Each states: what it is, the key
+1. **Hero** — datasheet header: name at display scale, a datum rule, then a spec
+   table carrying role, status, and location. Two CTAs.
+2. **The stack** — 4 layers (Interface, API, Data, Systems), each stating what it
+   owns and one concrete thing built in it
+3. **Selected Work** — 3 projects maximum. Each states: what it is, the key
    decision and its tradeoff, an outcome carrying a number
-3. **How I Work** — 3 decision records. Reasoning surfaced in the fast path
-4. **Currently** — what's live now, what's being learned now
-5. **Experience** — condensed, with scale
-6. **Contact**
+4. **How I Work** — 3 decision records. Reasoning surfaced in the fast path
+5. **Currently** — what's live now, what's being learned now
+6. **Experience** — condensed, with scale
+7. **Contact**
 
 ### Section rationale
+
+**The stack answers the full stack claim.** A list of technologies is a
+self-description and argues nothing. Four layers, each owning a responsibility
+and one real piece of work, is an argument. The section exists so the positioning
+is evidenced rather than asserted — and the depth ordering (interface outward to
+systems inward) mirrors how a request actually travels.
 
 **Work before thinking.** Work tells a recruiter *what*; thinking tells a hiring
 manager *how well*. Segregating thinking into its own section means a recruiter
@@ -190,19 +207,67 @@ Each experiment: goal, current state, what was learned, what broke, next step.
 
 ## 09 — Design direction
 
-Aesthetic decisions are made in the design phase using the `frontend-design`
-skill. This section fixes the constraints that skill does not decide.
+Aesthetic decisions are made using the `frontend-design` skill. This section
+fixes the constraints that skill does not decide, and records the direction
+actually implemented.
+
+### Concept: an engineering cross-section
+
+The site is presented as a **measured surface**. Structure carries information:
+
+- A faint **grid** sits behind the content and fades out before it reaches body
+  copy, so the page reads as a surface the content is placed on.
+- **Datum rules** separate sections. Each carries tick marks and an accent value
+  bar, so a rule is a measurement rather than a newspaper column divider.
+- **Crop marks** frame panels in the language of a technical drawing.
+- The **stack** is shown as layers, which is what the cross-section metaphor is
+  for.
+
+The tension that keeps this from being a template: an **editorial serif on a
+technical field**. The near-universal pairing in developer portfolios is technical
+grid plus sans or mono; using a serif for display is the deliberate departure.
+
+Type: **Newsreader** for display and body, **IBM Plex Mono** for data, labels and
+metadata. Two families, not the Inter default.
+
+Colour: monochrome-first, with a single iris accent used *structurally* — datum
+values, crop marks, layer edges, links — rather than as a floating highlight.
+
+### The first attempt failed this test
+
+Recorded because it is the most useful lesson in the project. The initial build
+used hairline rules above every section, zero border radius, and a dense
+four-column metadata grid. That is precisely the **broadsheet default** the skill
+warns about, and the monospace metadata was the **template-chrome** default. The
+risk was identified during planning and then implemented anyway.
+
+The distinguishing question, per the skill: is this a choice made for *this*
+brief, or one that would appear on any page? Structure must encode something true
+about the content.
+
+### Micro-animations
+
+Three coherent moments, not scattered effects:
+
+1. **One orchestrated page-load sequence** in the hero — staggered rise and a
+   datum drawing in. Runs once.
+2. **One scroll moment** — each section's datum rule draws in the first time that
+   section is seen, via `IntersectionObserver`, then stops observing.
+3. **Action-responding motion** — link underlines drawing in, crop marks
+   appearing on hover and focus, theme transitions.
+
+Fade-and-slide-up on every section is deliberately absent: it is the generic
+default and reads as generated. All of it collapses under
+`prefers-reduced-motion`, and the field is removed under `prefers-reduced-data`.
 
 ### The target
 
-**Outstanding, not fancy.** The restraint is the point: quality comes from
-typography, spacing, and hierarchy being right, not from effects being added.
-
-A well-set, precise editorial site reads as senior. A heavily animated one reads
-as a template. Restraint is what makes it look considered.
+**Outstanding, not fancy.** Quality comes from typography, spacing and hierarchy
+being right, not from effects being added.
 
 Hard prohibitions: 3D, particles, scroll-jacking, glassmorphism, gradient
-overuse, decorative motion.
+overuse, decorative motion, all-caps eyebrows on headings, middle-dot meta
+strings, numbered section markers, and `→` appended to link text.
 
 ### Theme toggle — requirements
 
