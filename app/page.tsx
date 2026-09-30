@@ -6,6 +6,7 @@ import { CopyEmail } from "@/components/copy-email";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress, SECTIONS } from "@/components/scroll-progress";
 import { SiteFooter } from "@/components/site-footer";
+import { TechIcon } from "@/components/tech-icon";
 import { Terminal } from "@/components/terminal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { experience, featuredProjects, site } from "@/content/site";
@@ -217,33 +218,34 @@ export default function Home() {
               The stack I work across.
             </h3>
             <p className="mt-4 max-w-[62ch] text-step-0 text-muted text-pretty">
-              Four layers, each with one job. The technologies I reach for most
-              often — each chosen with a reason.
+              Four layers, each with one job. Every tool here is one I have
+              actually shipped with.
             </p>
 
             <ul className="mt-7 grid gap-4 sm:grid-cols-2">
               {site.stack.map((layer) => (
-                <li key={layer.id} className="panel p-6">
+                <li key={layer.id} className="panel p-5 sm:p-6">
                   <div className="flex items-center gap-3">
                     <span
                       className={`h-7 w-1 rounded-full ${EDGE[layer.depth]}`}
                       aria-hidden="true"
                     />
                     <h4 className="text-step-2 text-head">{layer.name}</h4>
+                    <p className="ml-auto text-step--2 text-dim">{layer.owns}</p>
                   </div>
-                  <p className="mt-4 text-step--1 text-muted text-pretty">
-                    {layer.owns}
-                  </p>
-                  <p className="mt-2.5 text-step--1 text-muted text-pretty">
-                    {layer.built}
-                  </p>
-                  <ul className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
-                    {layer.tools.map((tool, i) => (
-                      <li
-                        key={i}
-                        className="rounded-md border border-line bg-panel-2 px-2 py-0.5 text-step--2 text-muted"
-                      >
-                        {tool}
+
+                  <ul className="mt-5 grid gap-x-4 gap-y-4 sm:grid-cols-2">
+                    {layer.techs.map((tech) => (
+                      <li key={tech.name} className="flex items-start gap-2.5">
+                        <TechIcon name={tech.name} icon={tech.icon} />
+                        <span className="min-w-0">
+                          <span className="block text-step--1 leading-tight text-text">
+                            {tech.name}
+                          </span>
+                          <span className="block text-step--2 leading-snug text-dim">
+                            {tech.note}
+                          </span>
+                        </span>
                       </li>
                     ))}
                   </ul>

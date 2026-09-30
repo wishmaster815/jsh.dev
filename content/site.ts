@@ -57,40 +57,57 @@ export const site: Site = {
         {
             id: "interface",
             name: "Interface",
-            owns: "What the user touches, and how fast it responds.",
-            built: "Built the BingeBuddy and BrainWave front ends, and this site — responsive, animated, and usable at phone widths.",
-            tools: [
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Tailwind",
-                "Framer Motion",
-            ],
+            owns: "What the user touches.",
             depth: 1,
+            techs: [
+                { name: "React", icon: "siReact", note: "UI components" },
+                { name: "Next.js", icon: "siNextdotjs", note: "Routing, SSG" },
+                { name: "TypeScript", icon: "siTypescript", note: "Types end to end" },
+                { name: "Tailwind", icon: "siTailwindcss", note: "Utility styling" },
+                { name: "Framer", icon: "siFramer", note: "Animation" },
+            ],
         },
         {
             id: "api",
             name: "API",
-            owns: "Contracts, validation, auth, and the error paths.",
-            built: "FastAPI and Express services behind DocuMind, ConversoAI and Birju.AI, including the retrieval and chat endpoints.",
-            tools: ["Python", "FastAPI", "Node.js", "Express", "LangChain"],
+            owns: "Contracts, validation, error paths.",
             depth: 2,
+            techs: [
+                { name: "Python", icon: "siPython", note: "Services, scripts" },
+                { name: "FastAPI", icon: "siFastapi", note: "Async APIs" },
+                { name: "Node.js", icon: "siNodedotjs", note: "Runtime" },
+                { name: "Express", icon: "siExpress", note: "REST routing" },
+                { name: "LangChain", icon: "siLangchain", note: "LLM pipelines" },
+                { name: "Groq", note: "Fast inference" },
+                { name: "Ollama", icon: "siOllama", note: "Local models" },
+            ],
         },
         {
             id: "data",
             name: "Data",
-            owns: "Schemas, queries, embeddings, and what happens when they are wrong.",
-            built: "Vector stores and embedding pipelines for document Q&A, plus Supabase schemas and auth across projects.",
-            tools: ["Supabase", "MongoDB", "Firebase", "Hugging Face"],
+            owns: "Schemas, queries, embeddings.",
             depth: 3,
+            techs: [
+                { name: "PostgreSQL", icon: "siPostgresql", note: "Relational data" },
+                { name: "Supabase", icon: "siSupabase", note: "Auth + Postgres" },
+                { name: "MongoDB", icon: "siMongodb", note: "Document store" },
+                { name: "Firebase", icon: "siFirebase", note: "Realtime, auth" },
+                { name: "Hugging Face", icon: "siHuggingface", note: "Embeddings" },
+                { name: "Redis", icon: "siRedis", note: "Cache, queues" },
+            ],
         },
         {
             id: "systems",
             name: "Systems",
-            owns: "Deploys, model choice, and what a request costs.",
-            built: "Deployment on Vercel and Render, and a move to Groq-hosted inference to keep per-request cost workable.",
-            tools: ["Vercel", "Render", "Groq", "Git", "Docker"],
+            owns: "Deploys, containers, versions.",
             depth: 4,
+            techs: [
+                { name: "Vercel", icon: "siVercel", note: "Edge deploy" },
+                { name: "Render", icon: "siRender", note: "Service hosting" },
+                { name: "Docker", icon: "siDocker", note: "Containers" },
+                { name: "Git", icon: "siGit", note: "Version control" },
+                { name: "GitHub", icon: "siGithub", note: "Repos, CI" },
+            ],
         },
     ],
     about,
@@ -140,6 +157,162 @@ export const experience: Experience[] = [
 
 export const projects: Project[] = [
     {
+        slug: "agentdock",
+
+        name: "AgentDock",
+
+        summary: "A terminal-native AI agent with multiple interaction modes",
+
+        description:
+            "A CLI-first AI agent inspired by tools like ClawCode, built to handle tasks directly from the terminal while supporting different ways of working. Agent mode executes tasks, Plan mode structures the work first, and Ask mode keeps interactions focused on questions and explanations.",
+
+        features: [
+            "Terminal-native AI agent interface",
+            "Agent, Plan, and Ask interaction modes",
+            "Task execution through the CLI",
+            "Telegram interface for remote agent access",
+            "Switch between interaction modes based on the task",
+        ],
+
+        problem:
+            "AI coding and task agents are powerful, but most workflows force you into a single interaction style. Sometimes you want the agent to execute, sometimes you want a plan first, and sometimes you just need an answer without any action.",
+
+        keyDecision: {
+            title: "Designing around interaction modes",
+
+            context:
+                "The same agent needs to handle very different workflows. Treating every request as an execution task made simple questions unnecessarily heavy, while planning and execution often needed to be separated.",
+
+            options: [
+                "Use a single agent flow for every interaction",
+                "Build separate agents for planning, execution, and questions",
+                "Use one agent with explicit interaction modes",
+            ],
+
+            chosen: "One agent with explicit interaction modes — keeping the core agent unified while letting the user control how it approaches a task.",
+
+            tradeoff:
+                "Modes add state and routing complexity, but make the agent more predictable and give users control over when the system plans, executes, or simply responds.",
+        },
+
+        stack: [
+            "Bun",
+            "TypeScript",
+            "Commander.js",
+            "Telegram Bot API",
+            "LLM APIs",
+        ],
+
+        links: [
+            {
+                label: "Source",
+                href: "https://github.com/wishmaster815/agent-dock",
+            },
+        ],
+
+        screenshot: "/projects/agentdock.png",
+
+        featured: true,
+
+        year: "2026",
+    },
+    {
+        slug: "padhai",
+
+        name: "PadhAI",
+
+        summary:
+            "A full-stack school ERP built for real-world school operations",
+
+        description:
+            "A production-ready school management platform designed to handle the complete academic workflow — from administration and class management to teacher-led classrooms and student learning. It connects admins, teachers, and students through role-based access, while giving teachers tools to create and manage learning modules for their classes.",
+
+        features: [
+            "Role-based access for admins, teachers, and students",
+            "School, class, section, and subject management",
+            "Teacher-controlled virtual classrooms and learning modules",
+            "Student access to teacher-created educational content",
+            "Administrative controls for managing the school ecosystem",
+            "End-to-end academic workflow from classroom setup to student learning",
+        ],
+
+        problem:
+            "Schools often rely on multiple disconnected systems for administration, classroom management, teacher workflows, and student learning. PadhAI brings these workflows into a single platform that can be deployed and used by real schools.",
+
+        keyDecision: {
+            title: "Designing one platform around three user roles",
+
+            context:
+                "Admins, teachers, and students interact with the school system in fundamentally different ways. A single generic interface would make the platform unnecessarily complex and difficult to use.",
+
+            options: [
+                "Build one shared interface for every user",
+                "Build completely separate systems for each role",
+                "Use role-based access with shared platform infrastructure",
+            ],
+
+            chosen: "Role-based access over a shared platform — keeping the underlying system unified while giving admins, teachers, and students workflows tailored to what they actually need.",
+
+            tradeoff:
+                "Role-based architecture adds authorization and permission complexity, but makes the system scalable across different school workflows without duplicating the core infrastructure.",
+        },
+
+        stack: [
+            // Add your actual PadhAI stack here
+        ],
+
+        links: [
+            {
+                label: "Source",
+                href: "YOUR_GITHUB_LINK",
+            },
+        ],
+
+        screenshot: "/projects/padhai.png",
+
+        featured: true,
+
+        year: "2026",
+    },
+    {
+        slug: "birju-ai",
+        name: "Birju.AI",
+        summary: "AI career and learning assistant",
+        description:
+            "Generates a staged learning roadmap for a chosen career path, then produces the quizzes and counselling report for each stage. Built around a sequence rather than a chat box, so a learner always knows what comes next.",
+        features: [
+            "Stage-wise roadmap generated per career path",
+            "Quizzes and reports produced per completed stage",
+            "Next.js frontend over a LangChain backend",
+            "Progress carried across sessions",
+        ],
+        problem:
+            "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
+        keyDecision: {
+            title: "Generating a staged plan instead of answering questions",
+            context:
+                "A chat interface answers whichever question gets asked. Learners need the opposite — a sequence, where each stage depends on the last and the next step is always defined.",
+            options: [
+                "A chatbot that answers whatever is asked",
+                "A one-shot generated roadmap with no follow-up",
+                "A staged plan where each stage produces quizzes and unlocks the next",
+            ],
+            chosen: "A staged roadmap, so the assistant has a spine to reason against instead of answering each prompt in isolation.",
+            tradeoff:
+                "The plan is only as good as the assessment behind it, and a weak self-assessment yields a confidently wrong roadmap. Making the stages explicit exposed that failure instead of hiding it in a chat log.",
+        },
+        stack: ["Next.js", "LangChain", "Python", "OpenAI"],
+        links: [
+            {
+                label: "Frontend",
+                href: "https://github.com/wishmaster815/Birju-Frontend-2",
+            },
+        ],
+        screenshot: "/projects/birju-ai.png",
+        featured: true,
+        year: "2025",
+    },
+    {
         slug: "documind",
         name: "DocuMind",
         summary: "Document Q&A over your own PDFs",
@@ -183,158 +356,6 @@ export const projects: Project[] = [
         screenshot: "/projects/documind.png",
         featured: true,
         year: "2025",
-    },
-    {
-        slug: "birju-ai",
-        name: "Birju.AI",
-        summary: "AI career and learning assistant",
-        description:
-            "Generates a staged learning roadmap for a chosen career path, then produces the quizzes and counselling report for each stage. Built around a sequence rather than a chat box, so a learner always knows what comes next.",
-        features: [
-            "Stage-wise roadmap generated per career path",
-            "Quizzes and reports produced per completed stage",
-            "Next.js frontend over a LangChain backend",
-            "Progress carried across sessions",
-        ],
-        problem:
-            "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
-        keyDecision: {
-            title: "Generating a staged plan instead of answering questions",
-            context:
-                "A chat interface answers whichever question gets asked. Learners need the opposite — a sequence, where each stage depends on the last and the next step is always defined.",
-            options: [
-                "A chatbot that answers whatever is asked",
-                "A one-shot generated roadmap with no follow-up",
-                "A staged plan where each stage produces quizzes and unlocks the next",
-            ],
-            chosen: "A staged roadmap, so the assistant has a spine to reason against instead of answering each prompt in isolation.",
-            tradeoff:
-                "The plan is only as good as the assessment behind it, and a weak self-assessment yields a confidently wrong roadmap. Making the stages explicit exposed that failure instead of hiding it in a chat log.",
-        },
-        stack: ["Next.js", "LangChain", "Python", "OpenAI"],
-        links: [
-            {
-                label: "Frontend",
-                href: "https://github.com/wishmaster815/Birju-Frontend-2",
-            },
-        ],
-        screenshot: "/projects/birju-ai.png",
-        featured: true,
-        year: "2025",
-    },
-    {
-        slug: "converso-ai",
-        name: "ConversoAI",
-        summary: "Context-aware chatbot product",
-        description:
-            "A conversational product where replies stay coherent across a long exchange. Conversation state lives server-side, so history survives a reload and the model answers as if it remembers rather than restarting every turn.",
-        features: [
-            "Server-side conversation state per session",
-            "Multi-turn replies that keep their context",
-            "Express and Node.js API with Supabase persistence",
-            "Deployed chat interface in React",
-        ],
-        problem:
-            "Static FAQ bots give the same answer regardless of what the visitor actually asked, so they deflect simple questions badly and fail the moment a real conversation starts.",
-        keyDecision: {
-            title: "Keeping conversation state server-side",
-            context:
-                "Multi-turn answers were inconsistent — the model replied as if every message were the first, because history was not travelling with the request.",
-            options: [
-                "Stateless requests, treating each message independently",
-                "Client-side history only, rebuilt on every page load",
-                "Server-side session state keyed per conversation",
-            ],
-            chosen: "Server-side session state per conversation, so history survives reloads and stays consistent across devices.",
-            tradeoff:
-                "Session state adds a storage dependency and an expiry decision. I traded a stateless, trivially scalable service for answers that actually remembered the conversation.",
-        },
-        stack: ["React", "Node.js", "Express", "LangChain", "Supabase"],
-        links: [
-            {
-                label: "Source",
-                href: "https://github.com/wishmaster815/ConversoAI_SaaS",
-            },
-        ],
-        screenshot: "/projects/converso-ai.png",
-        featured: true,
-        year: "2025",
-    },
-    {
-        slug: "bingebuddy",
-        name: "BingeBuddy",
-        summary: "Recommendation engine by mood and genre",
-        description:
-            "Finds a film or series from a mood, a genre, or titles you already like. Recommends from content similarity over the catalogue rather than from ratings, so it works without any user history to learn from.",
-        features: [
-            "Cosine similarity over vectorised item metadata",
-            "Cold-start recommendations with no user history",
-            "Synopsis text vectorised alongside structured fields",
-            "Mood and genre as the primary query",
-        ],
-        problem:
-            "Recommendation lists optimise for titles that already have many ratings, so they keep returning the same popular few. Choosing by mood is how people actually decide, and no catalogue search supports it.",
-        keyDecision: {
-            title: "Content-based vectors over a ratings database",
-            context:
-                "Collaborative filtering needs a large user-rating history that a project this size does not have, so there was no interaction data to learn from.",
-            options: [
-                "Collaborative filtering on user ratings",
-                "Popularity ranking by genre",
-                "Cosine similarity over vectorised metadata and synopsis text",
-            ],
-            chosen: "Cosine similarity over vectorised item metadata, which works from a cold start with no user history at all.",
-            tradeoff:
-                "Results stay in the neighbourhood of what was picked, so genuine serendipity is rare. I accepted a narrow, explainable set over a broad one I could not justify.",
-        },
-        stack: ["Python", "Pandas", "cosine similarity"],
-        links: [
-            {
-                label: "Source",
-                href: "https://github.com/wishmaster815/movie-recommendation-using-cosine-similarity",
-            },
-        ],
-        screenshot: "/projects/bingebuddy.png",
-        featured: false,
-        year: "2024",
-    },
-    {
-        slug: "brainwave",
-        name: "BrainWave",
-        summary: "Streaming AI chat app",
-        description:
-            "An open AI chat application built to learn the hard part of chat UX: rendering a response while it is still arriving, and keeping the partial state honest so a truncated answer is never mistaken for a finished one.",
-        features: [
-            "Token-by-token streaming as the response arrives",
-            "Explicit partial and complete response states",
-            "Conversation state held across turns",
-            "React front end over a chat backend",
-        ],
-        problem:
-            "A way to build a real streaming chat interface end to end, including partial responses and the state that has to survive them.",
-        keyDecision: {
-            title: "Rendering tokens as they arrive",
-            context:
-                "Waiting for a complete response before rendering made the app feel broken on anything longer than a sentence, with no feedback while it worked.",
-            options: [
-                "Wait for the full response, then render",
-                "Poll for partial output",
-                "Stream the response and append tokens as they land",
-            ],
-            chosen: "Streaming the response and appending tokens as they arrive.",
-            tradeoff:
-                "Partial output has to be handled honestly — a truncated answer that looks complete is worse than a spinner, so the streaming state is explicit rather than implied.",
-        },
-        stack: ["React", "JavaScript"],
-        links: [
-            {
-                label: "Source",
-                href: "https://github.com/wishmaster815/BrainWave-ReactJs",
-            },
-        ],
-        screenshot: "/projects/brainwave.png",
-        featured: false,
-        year: "2024",
     },
 ];
 

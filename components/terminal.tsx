@@ -19,7 +19,9 @@ type Line =
  * typing and no blinking cursor.
  */
 
-const STACK_TOOLS = site.stack.flatMap((layer) => layer.tools).filter(Boolean);
+const STACK_TOOLS = site.stack
+  .flatMap((layer) => layer.techs.map((tech) => tech.name))
+  .filter(Boolean);
 
 const LINES: Line[] = [
   { kind: "command", text: "whoami" },

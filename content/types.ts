@@ -53,20 +53,31 @@ export type Project = {
 };
 
 /**
+ * A single technology.
+ *
+ * `icon` is a simple-icons export name. It is optional because a few providers
+ * Groq and OpenAI have no brand mark in the set, and those fall back to a
+ * monogram rather than a guessed logo.
+ */
+export type Tech = {
+  name: string;
+  icon?: string;
+  /** What it is actually used for here, in a few words. */
+  note: string;
+};
+
+/**
  * A layer of the stack.
  *
  * Full stack is shown as actual layers with real responsibilities rather than a
- * list of technologies, because naming tools argues nothing.
+ * flat list of technologies, because naming tools argues nothing on its own.
  */
 export type StackLayer = {
   id: string;
   name: string;
-  /** What this layer is responsible for. */
+  /** One line on what this layer owns. */
   owns: string;
-  /** Concrete work done here. */
-  built: string;
-  /** Tools, honestly scoped to this layer only. */
-  tools: string[];
+  techs: Tech[];
   /** 1 is the outermost layer, 4 the deepest. Drives the edge weight. */
   depth: 1 | 2 | 3 | 4;
 };
