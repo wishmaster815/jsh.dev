@@ -23,31 +23,40 @@
 :root {
   color-scheme: light;
 
-  --bg: #f6f7f8;
+  --bg: #f4f6f6;
   --surface: #ffffff;
-  --raised: #fbfbfc;
-  --text: #14171a;
-  --muted: #565c64;
-  --line: #dfe2e6;
+  --raised: #eef1f1;
+  --text: #0d1114;
+  --muted: #4e565c;
+  --line: #dbe0e0;
   /* >= 3:1 against --bg: used for real markers, not just decoration. */
-  --line-strong: #7d858e;
+  --line-strong: #6f787e;
 
-  /* Structural accent. Appears as measurement and edge, not as a floating
-     highlight, so it never reads as the "bright accent on near-black" default. */
-  --accent: #4a45d8;
-  --accent-solid: #4a45d8;
+  /* Deep teal for light mode. The bright mint used in the dark theme cannot be
+     reused here or it disappears on paper, so the two accents are not the same
+     colour: light mode is designed, not token-swapped. */
+  --accent: #0f7a6a;
+  --accent-solid: #0f7a6a;
   --on-accent: #ffffff;
-  --accent-wash: #eeedfd;
+  --accent-wash: #dcf0ec;
 
   /* The measured field. Deliberately faint. */
-  --grid: #e2e5e9;
-  --tick: #aeb5bd;
+  --grid: #e0e5e5;
+  --tick: #b4bcbc;
 
   /* Layer tones for the stack section: a restrained sequence, not a rainbow. */
-  --layer-1: #14171a;
-  --layer-2: #3d444c;
-  --layer-3: #6b737c;
-  --layer-4: #9aa2ab;
+  --layer-1: #0d1114;
+  --layer-2: #384046;
+  --layer-3: #646d73;
+  --layer-4: #939ba1;
+
+  /* Terminal chrome. Light mode is a light console, not a dark one. */
+  --term-bg: #ffffff;
+  --term-bar: #eef1f1;
+  --term-text: #1b2226;
+  --term-muted: #5a646a;
+  --term-prompt: #0f7a6a;
+  --term-ok: #0f7a6a;
 
   --step--2: clamp(0.69rem, 0.68rem + 0.05vw, 0.72rem);
   --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
@@ -69,52 +78,67 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #12151a;
-  --surface: #181c22;
-  --raised: #1e232a;
-  --text: #edeef1;
-  --muted: #a0a7b1;
-  --line: #282e36;
-  --line-strong: #606975;
+  --bg: #0c0e11;
+  --surface: #14181d;
+  --raised: #1b2027;
+  --text: #eef0f2;
+  --muted: #9aa3ab;
+  --line: #232a31;
+  --line-strong: #656f79;
 
-  --accent: #8f8af8;
-  --accent-solid: #5a53e0;
-  --on-accent: #ffffff;
-  --accent-wash: #1e1f3d;
+  --accent: #2fd6a8;
+  --accent-solid: #14b389;
+  --on-accent: #04140f;
+  --accent-wash: #0f2a23;
 
-  --grid: #1d222a;
-  --tick: #454d58;
+  --grid: #171c21;
+  --tick: #3c454e;
 
-  --layer-1: #edeef1;
-  --layer-2: #aeb5be;
-  --layer-3: #7b838d;
-  --layer-4: #565e68;
+  --layer-1: #eef0f2;
+  --layer-2: #a9b2ba;
+  --layer-3: #78818a;
+  --layer-4: #545d66;
+
+  /* Dark console: a shade above the page so the window reads as a surface. */
+  --term-bg: #14181d;
+  --term-bar: #1b2027;
+  --term-text: #dde2e6;
+  --term-muted: #8b949c;
+  --term-prompt: #2fd6a8;
+  --term-ok: #2fd6a8;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --bg: #12151a;
-    --surface: #181c22;
-    --raised: #1e232a;
-    --text: #edeef1;
-    --muted: #a0a7b1;
-    --line: #282e36;
-    --line-strong: #606975;
+    --bg: #0c0e11;
+    --surface: #14181d;
+    --raised: #1b2027;
+    --text: #eef0f2;
+    --muted: #9aa3ab;
+    --line: #232a31;
+    --line-strong: #656f79;
 
-    --accent: #8f8af8;
-    --accent-solid: #5a53e0;
-    --on-accent: #ffffff;
-    --accent-wash: #1e1f3d;
+    --accent: #2fd6a8;
+    --accent-solid: #14b389;
+    --on-accent: #04140f;
+    --accent-wash: #0f2a23;
 
-    --grid: #1d222a;
-    --tick: #454d58;
+    --grid: #171c21;
+    --tick: #3c454e;
 
-    --layer-1: #edeef1;
-    --layer-2: #aeb5be;
-    --layer-3: #7b838d;
-    --layer-4: #565e68;
+    --layer-1: #eef0f2;
+    --layer-2: #a9b2ba;
+    --layer-3: #78818a;
+    --layer-4: #545d66;
+
+    --term-bg: #14181d;
+    --term-bar: #1b2027;
+    --term-text: #dde2e6;
+    --term-muted: #8b949c;
+    --term-prompt: #2fd6a8;
+    --term-ok: #2fd6a8;
   }
 }
 
@@ -135,8 +159,8 @@
   --color-layer-3: var(--layer-3);
   --color-layer-4: var(--layer-4);
 
-  --font-serif: var(--font-newsreader);
-  --font-mono: var(--font-plex-mono);
+  --font-sans: var(--font-sora), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   --text-step--2: var(--step--2);
   --text-step--1: var(--step--1);
@@ -166,11 +190,21 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  font-family: var(--font-sora), "Helvetica Neue", Arial, sans-serif;
   font-size: var(--step-0);
   line-height: 1.62;
   text-rendering: optimizeLegibility;
   font-synthesis-weight: none;
+}
+
+/* Micro-label: the tracked uppercase treatment used for eyebrows, nav and
+   datum captions. Reads as instrumentation rather than as a heading. */
+.label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: var(--step--2);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 :focus-visible {
@@ -361,6 +395,115 @@ body {
   opacity: 0;
   transform-origin: left center;
   animation: draw-x 900ms cubic-bezier(0.16, 0.84, 0.44, 1) 340ms forwards;
+}
+
+/* ==========================================================================
+   Terminal
+
+   A content readout, not a navigation shell. It carries its own token set so the
+   console stays legible in both themes instead of being a dark box dropped into
+   a light page.
+   ========================================================================== */
+
+.term {
+  background: var(--term-bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.term__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--term-bar);
+  border-bottom: 1px solid var(--line);
+}
+
+.term__dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.term__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.term__dot--r {
+  background: #f0655a;
+}
+.term__dot--y {
+  background: #f0b23c;
+}
+.term__dot--g {
+  background: #4cc96b;
+}
+
+.term__title {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: var(--step--2);
+  color: var(--term-muted);
+}
+
+.term__body {
+  padding: 1rem 1.1rem 1.15rem;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: var(--step--1);
+  line-height: 1.75;
+  color: var(--term-text);
+  /* Long tool lists wrap rather than forcing the console wide on a phone. */
+  overflow-wrap: anywhere;
+}
+
+.term__line {
+  min-height: 1.75em;
+}
+
+.term__line--cmd {
+  font-weight: 500;
+}
+
+.term__prompt {
+  color: var(--term-prompt);
+  user-select: none;
+}
+
+.term__ok {
+  color: var(--term-ok);
+}
+
+.term__caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--term-prompt);
+  animation: caret-blink 1.05s steps(1, end) infinite;
+}
+
+.term__caret--rest {
+  animation: caret-blink 1.6s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term__caret {
+    animation: none;
+  }
 }
 
 /* 2. Scroll moment. Gated by a data attribute so it only fires once, and only

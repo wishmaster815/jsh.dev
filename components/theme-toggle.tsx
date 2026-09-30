@@ -2,17 +2,22 @@
 
 import { useTheme, type Theme } from "./theme-provider";
 
+/**
+ * Compact three-state control. Rendered as a radio group so the three options are
+ * announced correctly and reachable by keyboard, rather than as a bare toggle
+ * that would discard the system option.
+ */
 const OPTIONS: { value: Theme; label: string }[] = [
-  { value: "system", label: "System" },
-  { value: "light", label: "Light" },
-  { value: "dark", label: "Dark" },
+  { value: "light", label: "Lt" },
+  { value: "system", label: "Au" },
+  { value: "dark", label: "Dk" },
 ];
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <fieldset className="flex items-center gap-1">
+    <fieldset className="flex items-center gap-1.5">
       <legend className="sr-only">Colour theme</legend>
       {OPTIONS.map((option) => {
         const active = theme === option.value;
@@ -22,10 +27,9 @@ export function ThemeToggle() {
             type="button"
             onClick={() => setTheme(option.value)}
             aria-pressed={active}
-            className={`px-2 py-1 font-mono text-step--1 transition-colors ${
-              active
-                ? "bg-text text-bg"
-                : "text-muted hover:text-text"
+            title={option.label === "Au" ? "Match system" : option.label === "Lt" ? "Light" : "Dark"}
+            className={`label px-1.5 py-0.5 transition-colors ${
+              active ? "text-accent" : "hover:text-text"
             }`}
           >
             {option.label}

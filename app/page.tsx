@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
+import { Terminal } from "@/components/terminal";
 import { experience, featuredProjects, journal, site } from "@/content/site";
 
 const EDGE: Record<1 | 2 | 3 | 4, string> = {
@@ -11,9 +12,9 @@ const EDGE: Record<1 | 2 | 3 | 4, string> = {
 };
 
 /**
- * A section is a measured layer: a title, a datum rule that draws in on scroll,
- * and content. No eyebrow label and no number, because the home sections are
- * not a sequence and a marker there would be decoration pretending to be
+ * A section is a measured layer: a micro-label, a title, a datum rule that draws
+ * in on scroll, and content. No numbered markers, because the home sections are
+ * not a sequence and a number there would be decoration pretending to be
  * information.
  */
 function Section({
@@ -36,22 +37,23 @@ function Section({
       className="mt-[var(--section-gap)] scroll-mt-10"
     >
       <Reveal>
+        <p className="label">{id}</p>
+        <h2
+          id={`${id}-heading`}
+          className="mt-4 max-w-[24ch] text-step-4 leading-[1.1] font-bold tracking-[-0.025em] text-balance"
+        >
+          {title}
+        </h2>
         <div
-          className="datum"
+          className="datum mt-7"
           style={{ "--datum": datum } as React.CSSProperties}
           aria-hidden="true"
         >
           <span className="datum__ticks" />
           <span className="datum__value" />
         </div>
-        <h2
-          id={`${id}-heading`}
-          className="mt-6 text-step-4 leading-[1.08] font-normal tracking-[-0.015em]"
-        >
-          {title}
-        </h2>
         {lede ? (
-          <p className="mt-4 max-w-[var(--measure)] text-step-1 text-muted text-pretty">
+          <p className="mt-7 max-w-[var(--measure)] text-step-0 leading-relaxed text-muted text-pretty">
             {lede}
           </p>
         ) : null}
@@ -71,69 +73,49 @@ export default function Home() {
 
       <main className="relative z-10 mx-auto w-full max-w-5xl flex-1 px-[var(--gutter)]">
         {/* ------------------------------------------------------------------
-            Hero — the one place the design spends its boldness. A datasheet
-            header: identity set large, a datum rule, then a spec table. The
-            page-load sequence is the single orchestrated moment.
+            Hero — the one place the design spends its boldness. Mirrors the
+            reference structure: micro-label, two-tone headline, lede, then the
+            console. The console is the memorable element; everything else stays
+            quiet.
             ------------------------------------------------------------------ */}
         <section className="pt-14 sm:pt-20">
-          <p className="enter enter-1 font-mono text-step--1 text-muted">
-            {site.location}
-          </p>
+          <p className="enter enter-1 label">{site.role}</p>
 
-          <h1 className="enter enter-2 mt-4 text-step-7 leading-[0.92] font-normal tracking-[-0.03em] text-balance">
-            {site.name}
+          <h1 className="enter enter-2 mt-6 max-w-[16ch] text-step-7 leading-[0.96] font-bold tracking-[-0.035em] text-balance">
+            I build things that{" "}
+            <span className="text-accent">run on the web.</span>
           </h1>
 
-          <div
-            className="enter-draw datum mt-10"
-            style={{ "--datum": "46%" } as React.CSSProperties}
-            aria-hidden="true"
-          >
-            <span className="datum__ticks" />
-            <span className="datum__value" />
-          </div>
-
-          <div className="enter enter-3 mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
-            <div>
-              <p className="font-mono text-step--2 uppercase tracking-[0.14em] text-muted">
-                Role
-              </p>
-              <p className="mt-1.5 text-step-1">{site.role}</p>
-            </div>
-            {site.availability ? (
-              <div>
-                <p className="font-mono text-step--2 uppercase tracking-[0.14em] text-muted">
-                  Status
-                </p>
-                <p className="mt-1.5 flex items-center gap-2 text-step-1">
-                  <span
-                    className="live-dot inline-block size-1.5 rounded-full bg-accent"
-                    aria-hidden="true"
-                  />
-                  {site.availability}
-                </p>
-              </div>
-            ) : null}
-          </div>
-
-          <p className="enter enter-4 mt-10 max-w-[var(--measure)] text-step-2 leading-[1.3] text-pretty">
-            {site.lead}
+          <p className="enter enter-3 mt-7 max-w-[58ch] text-step-1 leading-relaxed text-muted text-pretty">
+            {site.lead} From data model to interface — shipping end-to-end
+            products that are fast, accessible, and built to last.
           </p>
 
-          <div className="enter enter-4 mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
-            <a
-              href="#work"
-              className="link-rule text-step-1 text-accent"
-              style={{ transitionDelay: "80ms" }}
-            >
-              See the work
-            </a>
-            <a href="#contact" className="link-rule text-step-1">
-              Get in touch
-            </a>
-            <span className="font-mono text-step--1 text-muted">
-              {site.stats.map((s) => s.value).join("   ")}
-            </span>
+          <div className="enter enter-4 mt-11 max-w-2xl">
+            <Terminal />
+          </div>
+
+          <div className="enter enter-4 mt-11 grid gap-x-10 gap-y-6 border-t border-line pt-8 sm:grid-cols-3">
+            <div>
+              <p className="label">Based in</p>
+              <p className="mt-1.5 text-step-0">{site.location}</p>
+            </div>
+            <div>
+              <p className="label">Focus</p>
+              <p className="mt-1.5 text-step-0">
+                {site.stack.map((l) => l.name).join(", ")}
+              </p>
+            </div>
+            <div>
+              <p className="label">Status</p>
+              <p className="mt-1.5 flex items-center gap-2 text-step-0">
+                <span
+                  className="live-dot inline-block size-1.5 rounded-full bg-accent"
+                  aria-hidden="true"
+                />
+                {site.availability ?? "Open to work"}
+              </p>
+            </div>
           </div>
         </section>
 
