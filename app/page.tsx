@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { ContactRow, ProjectCard } from "@/components/project-card";
+import { SiteFooter } from "@/components/site-footer";
 import { Terminal } from "@/components/terminal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { experience, featuredProjects, site } from "@/content/site";
@@ -37,7 +38,7 @@ function Section({
       <h2 id={`${id}-heading`} className="sec-label">
         /{label}
       </h2>
-      <div className="mt-8">{children}</div>
+      <div className="mt-[var(--block-gap)]">{children}</div>
     </section>
   );
 }
@@ -54,14 +55,17 @@ export default function Home() {
       <div className="relative z-10">
         <header className="mx-auto max-w-6xl px-[var(--gutter)] pt-7">
           <div className="flex items-center justify-between gap-6">
-            <Link href="/" className="text-step-0 text-head">
-              ~/jayesh
+            <Link
+              href="/"
+              className="head-mark head-item head-1 text-step-0 text-head"
+            >
+              ~/jayesh-shrivastava
             </Link>
             <div className="flex items-center gap-5 sm:gap-7">
               <nav aria-label="Main">
                 <ul className="hidden items-center gap-6 sm:flex">
-                  {NAV.map((item) => (
-                    <li key={item.href}>
+                  {NAV.map((item, i) => (
+                    <li key={item.href} className={`head-item head-${i + 2}`}>
                       <Link href={item.href} className="label link">
                         {item.label}
                       </Link>
@@ -69,32 +73,35 @@ export default function Home() {
                   ))}
                 </ul>
               </nav>
-              <ThemeToggle />
+              <div className="head-item head-6">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
+          <div className="head-rule mt-5 h-px bg-line" />
         </header>
 
         <main className="mx-auto max-w-6xl px-[var(--gutter)]">
           {/* ================= Hero ================= */}
-          <section className="pt-14 sm:pt-20">
+          <section className="pt-10 sm:pt-14">
             <p className="enter enter-1 flex items-center gap-2 text-step--1 text-muted">
               <span className="live-dot inline-block size-1.5 rounded-full bg-ok" />
               {site.availability}
             </p>
 
-            <h1 className="enter enter-2 mt-6 max-w-[20ch] text-step-7 leading-[1.02] font-bold tracking-[-0.02em] text-head text-balance">
+            <h1 className="enter enter-2 mt-5 max-w-[20ch] text-step-7 leading-[1.02] font-bold tracking-[-0.02em] text-head text-balance">
               I build things that run on the web.
             </h1>
 
-            <p className="enter enter-3 mt-6 max-w-[64ch] text-step-0 text-muted text-pretty">
+            <p className="enter enter-3 mt-5 max-w-[64ch] text-step-0 text-muted text-pretty">
               {site.lead}
             </p>
 
-            <div className="enter enter-4 mt-10 max-w-2xl">
+            <div className="enter enter-4 mt-8 max-w-2xl">
               <Terminal />
             </div>
 
-            <div className="enter enter-4 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="enter enter-4 mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
               <a
                 href="#projects"
                 className="rounded-lg border border-head px-5 py-2.5 text-step-0 text-head transition-colors duration-200 hover:bg-head hover:text-on-head"
@@ -114,7 +121,7 @@ export default function Home() {
                 <h3 className="max-w-[28ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
                   {site.about.heading}
                 </h3>
-                <div className="mt-6 flex flex-col gap-4">
+                <div className="mt-5 flex flex-col gap-3.5">
                   {site.about.body.map((para) => (
                     <p
                       key={para.slice(0, 24)}
@@ -170,12 +177,12 @@ export default function Home() {
             <h3 className="max-w-[26ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
               The stack I work across.
             </h3>
-            <p className="mt-5 max-w-[62ch] text-step-0 text-muted text-pretty">
+            <p className="mt-4 max-w-[62ch] text-step-0 text-muted text-pretty">
               Four layers, each with one job. The technologies I reach for most
               often — each chosen with a reason.
             </p>
 
-            <ul className="mt-9 grid gap-4 sm:grid-cols-2">
+            <ul className="mt-7 grid gap-4 sm:grid-cols-2">
               {site.stack.map((layer) => (
                 <li key={layer.id} className="panel p-6">
                   <div className="flex items-center gap-3">
@@ -211,12 +218,12 @@ export default function Home() {
             <h3 className="max-w-[26ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
               Things I&apos;ve Built
             </h3>
-            <p className="mt-5 max-w-[62ch] text-step-0 text-muted text-pretty">
+            <p className="mt-4 max-w-[62ch] text-step-0 text-muted text-pretty">
               Real projects, each one built end to end — interface, API, and the
               data underneath.
             </p>
 
-            <ul className="mt-9 grid gap-5 lg:grid-cols-2">
+            <ul className="mt-7 grid gap-5 lg:grid-cols-2">
               {featuredProjects.map((project) => (
                 <li key={project.slug}>
                   <ProjectCard project={project} />
@@ -227,17 +234,17 @@ export default function Home() {
 
           {/* ================= Contact ================= */}
           <Section id="contact" label="contact">
-            <div className="grid gap-x-10 gap-y-10 lg:grid-cols-2">
+            <div className="grid gap-x-10 gap-y-8 lg:grid-cols-2">
               <div>
                 <h3 className="text-step-6 leading-[1.05] font-bold tracking-[-0.025em] text-text text-balance">
                   Let&apos;s work together
                 </h3>
-                <p className="mt-6 max-w-[46ch] text-step-0 text-muted text-pretty">
+                <p className="mt-5 max-w-[46ch] text-step-0 text-muted text-pretty">
                   Have an opportunity or project in mind? Send a quick message —
                   I usually respond within 24 hours.
                 </p>
 
-                <ul className="mt-9 flex flex-col gap-3">
+                <ul className="mt-7 flex flex-col gap-3">
                   {site.contact.map((item) => (
                     <li key={item.label}>
                       <ContactRow item={item} />
@@ -251,13 +258,7 @@ export default function Home() {
           </Section>
         </main>
 
-        <footer className="mx-auto max-w-6xl px-[var(--gutter)]">
-          <div className="mt-[var(--section-gap)] border-t border-line py-7">
-            <p className="label">
-              {site.name} — {site.role}, {site.location}
-            </p>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
     </>
   );

@@ -46,7 +46,9 @@
 
   --measure: 74ch;
   --gutter: clamp(1.1rem, 0.7rem + 2vw, 2.75rem);
-  --section-gap: clamp(4rem, 2.6rem + 6.5vw, 7.5rem);
+  /* Tightened: the reference sits closer together than the earlier pass. */
+  --section-gap: clamp(2.75rem, 1.9rem + 4.25vw, 5rem);
+  --block-gap: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
   --radius: 14px;
 }
 
@@ -398,6 +400,84 @@ body {
   animation-delay: 400ms;
 }
 
+/* Header: a left-to-right cascade, then the rule draws across beneath it. */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rule-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.head-item {
+  opacity: 0;
+  animation: slide-in 520ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+
+.head-1 {
+  animation-delay: 40ms;
+}
+.head-2 {
+  animation-delay: 130ms;
+}
+.head-3 {
+  animation-delay: 220ms;
+}
+.head-4 {
+  animation-delay: 310ms;
+}
+.head-5 {
+  animation-delay: 400ms;
+}
+.head-6 {
+  animation-delay: 490ms;
+}
+
+.head-rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: rule-in 900ms cubic-bezier(0.16, 0.84, 0.44, 1) 200ms forwards;
+}
+
+/* The wordmark underline draws once on load, then settles. */
+@keyframes pulse-underline {
+  0%,
+  100% {
+    background-size: 100% 1px;
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.head-mark {
+  position: relative;
+}
+
+.head-mark::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -3px 0;
+  height: 1px;
+  background: var(--head);
+  transform-origin: left center;
+  animation: rule-in 700ms cubic-bezier(0.16, 0.84, 0.44, 1) 300ms both,
+    pulse-underline 3.4s ease-in-out 1.2s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -411,9 +491,20 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  .enter {
+  .enter,
+  .head-item {
     opacity: 1;
     transform: none;
+  }
+
+  .head-rule {
+    transform: scaleX(1);
+  }
+
+  .head-mark::after {
+    animation: none;
+    transform: scaleX(1);
+    opacity: 0.55;
   }
 
   .term__caret {
