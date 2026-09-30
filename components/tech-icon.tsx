@@ -66,9 +66,15 @@ function monogram(name: string) {
 /**
  * Brand mark, or a monogram when the set has none.
  *
- * Brands own their marks, so a hand-drawn approximation of the Groq or OpenAI
- * logo would be both wrong and a trademark problem. Two letters read as
- * deliberate instead.
+ * The marks are drawn as shapes, not in their brand colours. A large share of
+ * brand hexes are black — Next.js, Vercel, Express, Git, Framer, LangChain —
+ * and those vanish against this site's near-black cards, while the bright ones
+ * (Python yellow, Mongo green) fight the teal accent. Filling with
+ * currentColor instead makes every mark follow the theme: light on dark, dark
+ * on light, with no per-brand exception table to maintain.
+ *
+ * Monochrome also reads as one system. Twenty-two competing brand colours in a
+ * card grid look like a badge wall rather than part of the page.
  */
 export function TechIcon({
   name,
@@ -97,10 +103,10 @@ export function TechIcon({
       role="img"
       aria-label={`${found.title} logo`}
       viewBox="0 0 24 24"
-      className={`${className} shrink-0`}
+      className={`${className} shrink-0 text-muted`}
     >
       <title>{found.title}</title>
-      <path fill={found.hex} d={found.path} />
+      <path fill="currentColor" d={found.path} />
     </svg>
   );
 }
