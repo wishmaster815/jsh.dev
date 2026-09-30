@@ -34,6 +34,7 @@ export const site: Site = {
     location: "India",
     availability: "Open to full stack and AI engineering roles",
     email: "jayeshshrivastava815@gmail.com",
+    github: "https://github.com/wishmaster815",
     /**
      * Google Drive, opened in a new tab. The viewer URL is used rather than the
      * uc?export=download endpoint because Drive shows its own preview, and
@@ -179,6 +180,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/DocuMind-AI",
             },
         ],
+        screenshot: "/projects/documind.png",
         featured: true,
         year: "2025",
     },
@@ -216,6 +218,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/Birju-Frontend-2",
             },
         ],
+        screenshot: "/projects/birju-ai.png",
         featured: true,
         year: "2025",
     },
@@ -253,6 +256,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/ConversoAI_SaaS",
             },
         ],
+        screenshot: "/projects/converso-ai.png",
         featured: true,
         year: "2025",
     },
@@ -290,6 +294,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/movie-recommendation-using-cosine-similarity",
             },
         ],
+        screenshot: "/projects/bingebuddy.png",
         featured: false,
         year: "2024",
     },
@@ -327,6 +332,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/BrainWave-ReactJs",
             },
         ],
+        screenshot: "/projects/brainwave.png",
         featured: false,
         year: "2024",
     },

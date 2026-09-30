@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { ContactRow, ProjectCard } from "@/components/project-card";
-import { ExternalIcon } from "@/components/icons";
+import { ExternalIcon, GitHubIcon } from "@/components/icons";
 import { CopyEmail } from "@/components/copy-email";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress, SECTIONS } from "@/components/scroll-progress";
@@ -269,6 +269,21 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+
+            {/* Not every project earns a card here, so point at the full set. */}
+            {site.github ? (
+              <div className="mt-8 flex justify-center">
+                <a
+                  href={site.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 rounded-lg border border-line px-6 py-3 text-step-0 text-muted transition-colors duration-200 hover:border-head hover:text-head"
+                >
+                  <GitHubIcon className="size-4" />
+                  View more projects on GitHub
+                </a>
+              </div>
+            ) : null}
           </Section>
 
           {/* ================= Contact ================= */}

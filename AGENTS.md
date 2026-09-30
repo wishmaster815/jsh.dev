@@ -140,3 +140,9 @@ shadows, and accenting a single word in a headline.
   contradicting it needs explicit approval.
 - One step at a time. Never attempt the whole portfolio in one pass.
 - Small conventional commits (`chore:` / `feat:` / `fix:` / `perf:`).
+- **Never commit with `git add -A`.** It has already caused real loss here: an
+  editor-side save of `content/site.ts`, made from a copy predating a change,
+  got swept into a commit and silently reverted the `screenshot` fields. Stage
+  the specific files you changed, and run `git status` first to see what else
+  the user has in flight — `components/site-footer.tsx` and `content/site.ts`
+  are frequently edited by hand.

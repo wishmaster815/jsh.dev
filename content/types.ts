@@ -120,4 +120,6 @@ export type Site = {
    * a dead download link is worse than no button.
    */
   resume?: string;
+  /** Profile URL for the "view more projects" button. */
+  github?: string;
 };
