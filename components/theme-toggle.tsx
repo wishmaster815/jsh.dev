@@ -35,9 +35,6 @@ export function ThemeToggle() {
         <MoonIcon className="theme-switch__icon theme-switch__icon--moon" />
       </span>
 
-      <span className="theme-switch__text label" aria-hidden="true">
-        {dark ? "dark" : "light"}
-      </span>
     </button>
   );
 }

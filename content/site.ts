@@ -1,7 +1,7 @@
 import type { About, Experience, Project, Site } from "./types";
 
 const about: About = {
-    heading: "Building AI systems that work beyond the demo",
+    heading: "Building AI systems that work beyond the demo.",
     body: [
         "I build production-grade AI and backend systems, along with the interfaces that sit on top of them — from APIs and RAG pipelines to polished, real-world products.",
         "I’ve completed my B.Tech in Computer Science and gained experience through ML, civic technology, and UI/UX internships, along with remote work for clients across different projects.",
@@ -16,10 +16,6 @@ const about: About = {
             platform: "GeeksforGeeks",
             href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
         },
-        {
-            platform: "Codeforces",
-            href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
-        },
     ],
 };
 
@@ -28,7 +24,7 @@ export const site: Site = {
     role: "Full stack developer",
     positioning:
         "I build AI-backed applications across the stack — interfaces, APIs, and the data underneath.",
-    lead: "Retrieval and chat systems on the backend, and the interfaces that make them usable. Most of my work is in the seam between the two.",
+    lead: "SWE | AI Engineer building scalable backends and AI-powered products end to end.",
     location: "India",
     availability: "Open to full stack and AI engineering roles",
     email: "jayeshshrivastava815@gmail.com",
