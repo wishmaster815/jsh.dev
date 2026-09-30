@@ -39,10 +39,18 @@ export type Project = {
   /** The problem that existed before this was built. */
   problem: string;
   /** The decision worth defending. */
-  keyDecision: Decision;
+  // keyDecision: Decision;
   stack: string[];
-  /** Shown in the card, capped at three with a "+N" overflow. */
-  links: Link[];
+  /**
+   * Repository URL. Rendered as "Source" with a GitHub glyph.
+   * Omit until the repo is public and the URL is real.
+   */
+  source?: string;
+  /**
+   * Deployed demo URL. Rendered as "Live" with an external-link glyph.
+   * Omit when there is no deployment — a dead link is worse than no link.
+   */
+  live?: string;
   /**
    * Screenshot path under /public. Optional: until one is added the card falls
    * back to a generated panel, so nothing renders as a broken image.

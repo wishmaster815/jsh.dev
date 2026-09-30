@@ -62,8 +62,16 @@ export const site: Site = {
             techs: [
                 { name: "React", icon: "siReact", note: "UI components" },
                 { name: "Next.js", icon: "siNextdotjs", note: "Routing, SSG" },
-                { name: "TypeScript", icon: "siTypescript", note: "Types end to end" },
-                { name: "Tailwind", icon: "siTailwindcss", note: "Utility styling" },
+                {
+                    name: "TypeScript",
+                    icon: "siTypescript",
+                    note: "Types end to end",
+                },
+                {
+                    name: "Tailwind",
+                    icon: "siTailwindcss",
+                    note: "Utility styling",
+                },
                 { name: "Framer", icon: "siFramer", note: "Animation" },
             ],
         },
@@ -77,7 +85,11 @@ export const site: Site = {
                 { name: "FastAPI", icon: "siFastapi", note: "Async APIs" },
                 { name: "Node.js", icon: "siNodedotjs", note: "Runtime" },
                 { name: "Express", icon: "siExpress", note: "REST routing" },
-                { name: "LangChain", icon: "siLangchain", note: "LLM pipelines" },
+                {
+                    name: "LangChain",
+                    icon: "siLangchain",
+                    note: "LLM pipelines",
+                },
                 { name: "Groq", note: "Fast inference" },
                 { name: "Ollama", icon: "siOllama", note: "Local models" },
             ],
@@ -88,11 +100,27 @@ export const site: Site = {
             owns: "Schemas, queries, embeddings.",
             depth: 3,
             techs: [
-                { name: "PostgreSQL", icon: "siPostgresql", note: "Relational data" },
-                { name: "Supabase", icon: "siSupabase", note: "Auth + Postgres" },
+                {
+                    name: "PostgreSQL",
+                    icon: "siPostgresql",
+                    note: "Relational data",
+                },
+                {
+                    name: "Supabase",
+                    icon: "siSupabase",
+                    note: "Auth + Postgres",
+                },
                 { name: "MongoDB", icon: "siMongodb", note: "Document store" },
-                { name: "Firebase", icon: "siFirebase", note: "Realtime, auth" },
-                { name: "Hugging Face", icon: "siHuggingface", note: "Embeddings" },
+                {
+                    name: "Firebase",
+                    icon: "siFirebase",
+                    note: "Realtime, auth",
+                },
+                {
+                    name: "Hugging Face",
+                    icon: "siHuggingface",
+                    note: "Embeddings",
+                },
                 { name: "Redis", icon: "siRedis", note: "Cache, queues" },
             ],
         },
@@ -177,24 +205,6 @@ export const projects: Project[] = [
         problem:
             "AI coding and task agents are powerful, but most workflows force you into a single interaction style. Sometimes you want the agent to execute, sometimes you want a plan first, and sometimes you just need an answer without any action.",
 
-        keyDecision: {
-            title: "Designing around interaction modes",
-
-            context:
-                "The same agent needs to handle very different workflows. Treating every request as an execution task made simple questions unnecessarily heavy, while planning and execution often needed to be separated.",
-
-            options: [
-                "Use a single agent flow for every interaction",
-                "Build separate agents for planning, execution, and questions",
-                "Use one agent with explicit interaction modes",
-            ],
-
-            chosen: "One agent with explicit interaction modes — keeping the core agent unified while letting the user control how it approaches a task.",
-
-            tradeoff:
-                "Modes add state and routing complexity, but make the agent more predictable and give users control over when the system plans, executes, or simply responds.",
-        },
-
         stack: [
             "Bun",
             "TypeScript",
@@ -203,12 +213,7 @@ export const projects: Project[] = [
             "LLM APIs",
         ],
 
-        links: [
-            {
-                label: "Source",
-                href: "https://github.com/wishmaster815/agent-dock",
-            },
-        ],
+        source: "https://github.com/wishmaster815/agent-dock",
 
         screenshot: "/projects/agentdock.png",
 
@@ -222,51 +227,25 @@ export const projects: Project[] = [
         name: "PadhAI",
 
         summary:
-            "A full-stack school ERP built for real-world school operations",
+            "A production-ready school ERP for managing academics and classrooms",
 
         description:
-            "A production-ready school management platform designed to handle the complete academic workflow — from administration and class management to teacher-led classrooms and student learning. It connects admins, teachers, and students through role-based access, while giving teachers tools to create and manage learning modules for their classes.",
+            "A full-stack school management platform connecting admins, teachers, and students through role-based workflows — from school and class management to teacher-led classrooms and student learning modules.",
 
         features: [
-            "Role-based access for admins, teachers, and students",
+            "Role-based admin, teacher, and student access",
             "School, class, section, and subject management",
-            "Teacher-controlled virtual classrooms and learning modules",
-            "Student access to teacher-created educational content",
-            "Administrative controls for managing the school ecosystem",
-            "End-to-end academic workflow from classroom setup to student learning",
+            "Teacher-managed classrooms and learning modules",
+            "Student access to teacher-created content",
         ],
 
         problem:
-            "Schools often rely on multiple disconnected systems for administration, classroom management, teacher workflows, and student learning. PadhAI brings these workflows into a single platform that can be deployed and used by real schools.",
-
-        keyDecision: {
-            title: "Designing one platform around three user roles",
-
-            context:
-                "Admins, teachers, and students interact with the school system in fundamentally different ways. A single generic interface would make the platform unnecessarily complex and difficult to use.",
-
-            options: [
-                "Build one shared interface for every user",
-                "Build completely separate systems for each role",
-                "Use role-based access with shared platform infrastructure",
-            ],
-
-            chosen: "Role-based access over a shared platform — keeping the underlying system unified while giving admins, teachers, and students workflows tailored to what they actually need.",
-
-            tradeoff:
-                "Role-based architecture adds authorization and permission complexity, but makes the system scalable across different school workflows without duplicating the core infrastructure.",
-        },
+            "Schools often use disconnected tools for administration, teaching, and student learning. PadhAI brings these workflows into one platform built for real-world school deployment.",
 
         stack: [
-            // Add your actual PadhAI stack here
+            // Add your actual stack
         ],
 
-        links: [
-            {
-                label: "Source",
-                href: "YOUR_GITHUB_LINK",
-            },
-        ],
 
         screenshot: "/projects/padhai.png",
 
@@ -288,57 +267,32 @@ export const projects: Project[] = [
         ],
         problem:
             "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
-        keyDecision: {
-            title: "Generating a staged plan instead of answering questions",
-            context:
-                "A chat interface answers whichever question gets asked. Learners need the opposite — a sequence, where each stage depends on the last and the next step is always defined.",
-            options: [
-                "A chatbot that answers whatever is asked",
-                "A one-shot generated roadmap with no follow-up",
-                "A staged plan where each stage produces quizzes and unlocks the next",
-            ],
-            chosen: "A staged roadmap, so the assistant has a spine to reason against instead of answering each prompt in isolation.",
-            tradeoff:
-                "The plan is only as good as the assessment behind it, and a weak self-assessment yields a confidently wrong roadmap. Making the stages explicit exposed that failure instead of hiding it in a chat log.",
-        },
         stack: ["Next.js", "LangChain", "Python", "OpenAI"],
-        links: [
-            {
-                label: "Frontend",
-                href: "https://github.com/wishmaster815/Birju-Frontend-2",
-            },
-        ],
+        source: "https://github.com/wishmaster815/Birju-Frontend-2",
         screenshot: "/projects/birju-ai.png",
         featured: true,
         year: "2025",
     },
     {
         slug: "documind",
+
         name: "DocuMind",
-        summary: "Document Q&A over your own PDFs",
+
+        summary: "AI-powered Q&A over your own PDFs",
+
         description:
-            "A retrieval pipeline over uploaded PDFs, served through a FastAPI backend and a Next.js interface. Answers are grounded in the document instead of generated from memory, so a question the document cannot answer comes back empty rather than plausible.",
+            "A RAG-based document Q&A system that lets users upload PDFs and ask questions grounded in their content, with relevant source passages returned alongside each answer.",
+
         features: [
-            "PDF upload with fixed-size overlapping chunking",
-            "Embedding retrieval with Hugging Face models",
-            "Grounded answers via Groq-hosted inference",
-            "Source passages surfaced alongside every answer",
+            "PDF upload and document chunking",
+            "Embedding-based semantic retrieval",
+            "Grounded answers using Groq-hosted LLMs",
+            "Source passages shown with responses",
         ],
+
         problem:
-            "Long documents are unusable when you need one specific fact from them. Keyword search finds the wrong page, and re-reading a report to find one paragraph is slow enough that people give up and ask someone instead.",
-        keyDecision: {
-            title: "Chunking strategy, and accepting retrieval noise",
-            context:
-                "Answer quality collapsed on long PDFs. Single large chunks lost the surrounding context an answer needed, while very small chunks retrieved fragments with no meaning on their own.",
-            options: [
-                "One chunk per document, relying on the model to read it all",
-                "Fixed-size overlapping chunks retrieved by embedding similarity",
-                "Smaller chunks plus a reranking pass to recover precision",
-            ],
-            chosen: "Fixed-size overlapping chunks retrieved by embedding similarity — it fixed the worst failures while keeping the system debuggable.",
-            tradeoff:
-                "Retrieval still returns loosely related passages often enough to need a rerank step. I traded some accuracy for a system I could actually debug.",
-        },
+            "Finding specific information in long documents is slow and frustrating. DocuMind makes documents searchable through natural language while keeping answers grounded in the source.",
+
         stack: [
             "Python",
             "FastAPI",
@@ -347,14 +301,13 @@ export const projects: Project[] = [
             "Hugging Face",
             "Next.js",
         ],
-        links: [
-            {
-                label: "Source",
-                href: "https://github.com/wishmaster815/DocuMind-AI",
-            },
-        ],
+
+        source: "https://github.com/wishmaster815/DocuMind-AI",
+
         screenshot: "/projects/documind.png",
+
         featured: true,
+
         year: "2025",
     },
 ];

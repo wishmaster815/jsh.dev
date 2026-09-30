@@ -9,7 +9,8 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "check:keys": "node scripts/check-duplicate-keys.mjs",
-    "gate": "npm run typecheck && npm run lint && npm run build && npm run check:keys"
+    "check:links": "node scripts/check-links.mjs",
+    "gate": "npm run typecheck && npm run lint && npm run build && npm run check:keys && npm run check:links"
   },
   "dependencies": {
     "next": "16.3.7",

@@ -101,27 +101,36 @@ export function ProjectCard({ project }: { project: Project }) {
             ) : null}
           </ul>
 
-          {project.links.length > 0 ? (
-            <ul className="mt-4 flex items-center gap-4 text-muted">
-              {project.links.map((link) => (
-                <li key={link.href}>
+          {(project.source || project.live) && (
+            <ul className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-4">
+              {project.source ? (
+                <li>
                   <a
-                    href={link.href}
+                    href={project.source}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="flex items-center gap-1.5 text-step--2 transition-colors hover:text-head"
+                    className="flex items-center gap-2 text-step--1 text-muted transition-colors duration-200 hover:text-head"
                   >
-                    {/github\.com/.test(link.href) ? (
-                      <GitHubIcon className="size-4" />
-                    ) : (
-                      <ExternalIcon className="size-4" />
-                    )}
-                    {link.label}
+                    <GitHubIcon className="size-4" />
+                    Source
                   </a>
                 </li>
-              ))}
+              ) : null}
+              {project.live ? (
+                <li>
+                  <a
+                    href={project.live}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="flex items-center gap-2 text-step--1 text-muted transition-colors duration-200 hover:text-head"
+                  >
+                    <ExternalIcon className="size-4" />
+                    Live
+                  </a>
+                </li>
+              ) : null}
             </ul>
-          ) : null}
+          )}
         </div>
       </div>
     </article>
