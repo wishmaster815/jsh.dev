@@ -36,15 +36,19 @@ export const site: Site = {
     location: "India",
     availability: "Open to full stack and AI engineering roles",
     email: "jayeshshrivastava815@gmail.com",
+    /**
+     * Google Drive, opened in a new tab. The viewer URL is used rather than the
+     * uc?export=download endpoint because Drive shows its own preview, and
+     * because a raw download link is the one most likely to break when the
+     * share settings change.
+     */
+    resume:
+        "https://drive.google.com/file/d/1gTRvXE_1-RSw2Vuy4VYomVW401402E7T/view?usp=sharing",
     links: [
         { label: "GitHub", href: "https://github.com/wishmaster815" },
         {
             label: "LinkedIn",
             href: "https://www.linkedin.com/in/shrivastava-jayesh/",
-        },
-        {
-            label: "Resume",
-            href: "https://drive.google.com/file/d/1gTRvXE_1-RSw2Vuy4VYomVW401402E7T/view?usp=sharing",
         },
     ],
     stats: [
