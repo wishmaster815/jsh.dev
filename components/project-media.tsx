@@ -1,17 +1,13 @@
-"use client";
-
 import Image from "next/image";
 
 /**
  * Project media area.
  *
- * The gradient is always rendered as the base layer and the screenshot sits on
- * top of it, rather than the two being mutually exclusive states. That means a
- * configured-but-missing file leaves the gradient showing instead of an empty
- * box, with no load-error state and no failed-image flash.
+ * Just the screenshot, with a scrim strong enough that the title stays legible
+ * over a light UI. There is no gradient fallback layer: a project either has a
+ * screenshot or the card shows nothing, which is honest about what exists.
  *
- * The client boundary exists only because next/image needs onLoad; the markup
- * itself would work as a server component.
+ * A server component. next/image does not require a client boundary here.
  */
 export function ProjectMedia({
   name,
@@ -22,15 +18,6 @@ export function ProjectMedia({
 }) {
   return (
     <div className="relative h-44 w-full sm:h-52">
-      {/* Base layer: always present, so the card is never empty. */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(150deg, color-mix(in srgb, var(--head) 16%, transparent) 0%, transparent 55%), radial-gradient(120% 90% at 85% 15%, color-mix(in srgb, var(--head-2) 14%, transparent) 0%, transparent 70%)",
-        }}
-      />
-
       {src ? (
         <Image
           src={src}
@@ -43,8 +30,16 @@ export function ProjectMedia({
         />
       ) : null}
 
-      {/* Scrim, so the title stays readable over any screenshot. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--panel)] via-[var(--panel)]/20 to-transparent" />
+      {/*
+        Scrim. Screenshots are mostly light application chrome, so a weak fade
+        leaves the title sitting on white pixels. This is nearly opaque at the
+        bottom where the text is and clear by the middle, which keeps the
+        screenshot visible while making the text readable.
+      */}
+      <div className="absolute inset-0 bg-linear-to-t from-panel from-35% via-panel/80 via-65% to-transparent" />
+
+      {/* A hairline under the text block, to lift it off a busy UI. */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-line" />
     </div>
   );
 }

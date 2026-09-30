@@ -54,8 +54,15 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="relative border-b border-line">
         <ProjectMedia name={project.name} src={project.screenshot} />
 
-        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-          <h3 className="text-step-2 text-text">{project.name}</h3>
+        {/*
+          The title sits on the image rather than over it, so a light or busy
+          screenshot can never render the text unreadable. The scrim in
+          ProjectMedia only has to seat the block against the edge.
+        */}
+        <div className="absolute inset-x-0 bottom-0 bg-panel/95 px-4 py-3 backdrop-blur-sm sm:px-5">
+          <h3 className="text-step-2 leading-tight text-text">
+            {project.name}
+          </h3>
           <p className="mt-0.5 text-step--2 text-head">{project.summary}</p>
         </div>
       </div>
