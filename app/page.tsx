@@ -1,15 +1,23 @@
 import Link from "next/link";
-import { Card } from "@/components/card";
+import { ContactForm } from "@/components/contact-form";
+import { ContactRow, ProjectCard } from "@/components/project-card";
 import { Terminal } from "@/components/terminal";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { experience, featuredProjects, otherProjects, site } from "@/content/site";
+import { experience, featuredProjects, site } from "@/content/site";
 
 const EDGE: Record<1 | 2 | 3 | 4, string> = {
-  1: "bg-accent",
-  2: "bg-accent/80",
-  3: "bg-accent-2/70",
-  4: "bg-muted/60",
+  1: "bg-head",
+  2: "bg-head/75",
+  3: "bg-head-2/70",
+  4: "bg-dim",
 };
+
+const NAV = [
+  { href: "/#about", label: "About" },
+  { href: "/#stack", label: "Stack" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#contact", label: "Contact" },
+];
 
 function Section({
   id,
@@ -26,10 +34,10 @@ function Section({
       aria-labelledby={`${id}-heading`}
       className="mt-[var(--section-gap)] scroll-mt-10"
     >
-      <h2 id={`${id}-heading`} className="sr-only">
-        {label}
+      <h2 id={`${id}-heading`} className="sec-label">
+        /{label}
       </h2>
-      {children}
+      <div className="mt-8">{children}</div>
     </section>
   );
 }
@@ -37,84 +45,80 @@ function Section({
 export default function Home() {
   return (
     <>
-      <div className="ambient" aria-hidden="true">
-        <div className="ambient__glow" />
-        <div className="ambient__grain" />
+      <div className="backdrop" aria-hidden="true">
+        <div className="backdrop__grid" />
+        <div className="backdrop__bloom" />
+        <div className="backdrop__vignette" />
       </div>
 
       <div className="relative z-10">
-        {/* ================= Hero ================= */}
-        <header className="mx-auto max-w-5xl px-[var(--gutter)] pt-8">
+        <header className="mx-auto max-w-6xl px-[var(--gutter)] pt-7">
           <div className="flex items-center justify-between gap-6">
-            <Link
-              href="/"
-              className="font-mono text-step-0 font-medium text-accent"
-            >
-              dev
+            <Link href="/" className="text-step-0 text-head">
+              ~/jayesh
             </Link>
-            <nav aria-label="Main">
-              <ul className="flex items-center gap-5 sm:gap-7">
-                {[
-                  { href: "/#about", label: "About" },
-                  { href: "/#stack", label: "Stack" },
-                  { href: "/#projects", label: "Projects" },
-                  { href: "/#contact", label: "Contact" },
-                ].map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="label hover:text-text">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <ThemeToggle />
+            <div className="flex items-center gap-5 sm:gap-7">
+              <nav aria-label="Main">
+                <ul className="hidden items-center gap-6 sm:flex">
+                  {NAV.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="label link">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <ThemeToggle />
+            </div>
           </div>
         </header>
 
-        <main className="mx-auto max-w-5xl px-[var(--gutter)]">
-          <section className="pt-16 sm:pt-24">
-            <p className="enter enter-1 label">{site.role}</p>
+        <main className="mx-auto max-w-6xl px-[var(--gutter)]">
+          {/* ================= Hero ================= */}
+          <section className="pt-14 sm:pt-20">
+            <p className="enter enter-1 flex items-center gap-2 text-step--1 text-muted">
+              <span className="live-dot inline-block size-1.5 rounded-full bg-ok" />
+              {site.availability}
+            </p>
 
-            <h1 className="enter enter-2 mt-6 max-w-[17ch] text-step-7 leading-[0.98] font-bold tracking-[-0.035em] text-balance">
-              I build things that{" "}
-              <span className="spectral">run on the web.</span>
+            <h1 className="enter enter-2 mt-6 max-w-[20ch] text-step-7 leading-[1.02] font-bold tracking-[-0.02em] text-head text-balance">
+              I build things that run on the web.
             </h1>
 
-            <p className="enter enter-3 mt-7 max-w-[58ch] text-step-1 leading-relaxed text-muted text-pretty">
+            <p className="enter enter-3 mt-6 max-w-[64ch] text-step-0 text-muted text-pretty">
               {site.lead}
             </p>
 
-            <div className="enter enter-4 mt-11 max-w-2xl">
+            <div className="enter enter-4 mt-10 max-w-2xl">
               <Terminal />
             </div>
 
             <div className="enter enter-4 mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <a
                 href="#projects"
-                className="rounded-full bg-accent px-5 py-2.5 text-step-0 font-medium text-on-accent transition-transform duration-200 hover:scale-[1.03]"
+                className="rounded-lg border border-head px-5 py-2.5 text-step-0 text-head transition-colors duration-200 hover:bg-head hover:text-on-head"
               >
-                See the projects
+                View Projects
               </a>
-              <a href="#contact" className="link-rule text-step-0">
-                Get in touch
+              <a href="#contact" className="link text-step-0 text-muted">
+                Let&apos;s talk
               </a>
             </div>
           </section>
 
           {/* ================= About ================= */}
-          <Section id="about" label="About">
-            <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+          <Section id="about" label="about">
+            <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
               <div>
-                <p className="label">About</p>
-                <h3 className="mt-4 max-w-[26ch] text-step-4 leading-[1.12] font-bold tracking-[-0.025em] text-balance">
+                <h3 className="max-w-[28ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
                   {site.about.heading}
                 </h3>
-                <div className="mt-7 flex flex-col gap-5">
+                <div className="mt-6 flex flex-col gap-4">
                   {site.about.body.map((para) => (
                     <p
                       key={para.slice(0, 24)}
-                      className="max-w-[var(--measure)] text-pretty"
+                      className="max-w-[var(--measure)] text-step-0 text-muted text-pretty"
                     >
                       {para}
                     </p>
@@ -123,24 +127,24 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <Card className="p-5">
+                <div className="panel p-5">
                   <p className="label">Experience</p>
                   <ul className="mt-4 flex flex-col gap-4">
                     {experience.map((item) => (
                       <li key={`${item.org}-${item.role}`}>
-                        <p className="text-step-0 leading-snug">{item.role}</p>
-                        <p className="mt-0.5 font-mono text-step--2 text-muted">
+                        <p className="text-step-0 text-text">{item.role}</p>
+                        <p className="mt-0.5 text-step--2 text-head">
                           {item.org}
                         </p>
-                        <p className="mt-1.5 text-step--1 text-muted text-pretty">
+                        <p className="mt-1.5 text-step--2 text-muted text-pretty">
                           {item.detail}
                         </p>
                       </li>
                     ))}
                   </ul>
-                </Card>
+                </div>
 
-                <Card className="p-5">
+                <div className="panel p-5">
                   <p className="label">Practice</p>
                   <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                     {site.about.practice.map((item) => (
@@ -149,171 +153,106 @@ export default function Home() {
                           href={item.href}
                           rel="me noopener noreferrer"
                           target="_blank"
-                          className="link-rule text-step-0 text-accent"
+                          className="link text-step-0 text-head"
                         >
                           {item.platform}
                         </a>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-4 text-step--1 text-muted text-pretty">
-                    Problem solving outside the projects. These links are
-                    checkable.
-                  </p>
-                </Card>
+                </div>
               </div>
             </div>
           </Section>
 
           {/* ================= Stack ================= */}
-          <Section id="stack" label="Stack">
-            <p className="label">Stack</p>
-            <h3 className="mt-4 max-w-[24ch] text-step-4 leading-[1.12] font-bold tracking-[-0.025em] text-balance">
-              Four layers, each with one job.
+          <Section id="stack" label="stack">
+            <h3 className="max-w-[26ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
+              The stack I work across.
             </h3>
-            <p className="mt-5 max-w-[var(--measure)] text-muted text-pretty">
-              The technologies I reach for most often — each chosen with a
-              reason, and each held to the layer it belongs to.
+            <p className="mt-5 max-w-[62ch] text-step-0 text-muted text-pretty">
+              Four layers, each with one job. The technologies I reach for most
+              often — each chosen with a reason.
             </p>
 
             <ul className="mt-9 grid gap-4 sm:grid-cols-2">
               {site.stack.map((layer) => (
-                <li key={layer.id}>
-                  <Card className="h-full p-6">
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`h-8 w-1 rounded-full ${EDGE[layer.depth]}`}
-                        aria-hidden="true"
-                      />
-                      <h4 className="text-step-2 leading-none">
-                        {layer.name}
-                      </h4>
-                    </div>
-                    <p className="mt-4 text-step--1 text-muted text-pretty">
-                      {layer.owns}
-                    </p>
-                    <p className="mt-3 text-step--1 text-pretty">
-                      {layer.built}
-                    </p>
-                    <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 font-mono text-step--2 text-muted">
-                      {layer.tools.map((tool, i) => (
-                        <li key={i}>{tool}</li>
-                      ))}
-                    </ul>
-                  </Card>
+                <li key={layer.id} className="panel p-6">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`h-7 w-1 rounded-full ${EDGE[layer.depth]}`}
+                      aria-hidden="true"
+                    />
+                    <h4 className="text-step-2 text-head">{layer.name}</h4>
+                  </div>
+                  <p className="mt-4 text-step--1 text-muted text-pretty">
+                    {layer.owns}
+                  </p>
+                  <p className="mt-2.5 text-step--1 text-muted text-pretty">
+                    {layer.built}
+                  </p>
+                  <ul className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
+                    {layer.tools.map((tool, i) => (
+                      <li
+                        key={i}
+                        className="rounded-md border border-line bg-panel-2 px-2 py-0.5 text-step--2 text-muted"
+                      >
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               ))}
             </ul>
           </Section>
 
-          {/* ================= Projects ================= */}
-          <Section id="projects" label="Projects">
-            <p className="label">Projects</p>
-            <h3 className="mt-4 max-w-[24ch] text-step-4 leading-[1.12] font-bold tracking-[-0.025em] text-balance">
-              Built end to end, and the decision that shaped each one.
+          {/* ================= Projects — detail inline, no separate pages ==== */}
+          <Section id="projects" label="projects">
+            <h3 className="max-w-[26ch] text-step-5 leading-[1.1] font-bold tracking-[-0.02em] text-head text-balance">
+              Things I&apos;ve Built
             </h3>
+            <p className="mt-5 max-w-[62ch] text-step-0 text-muted text-pretty">
+              Real projects, each one built end to end — interface, API, and the
+              data underneath.
+            </p>
 
-            <ul className="mt-9 flex flex-col gap-4">
+            <ul className="mt-9 grid gap-5 lg:grid-cols-2">
               {featuredProjects.map((project) => (
                 <li key={project.slug}>
-                  <Link href={`/work/${project.slug}`} className="block">
-                    <Card className="p-6 sm:p-7">
-                      <div className="grid gap-x-8 gap-y-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
-                        <div>
-                          <h4 className="text-step-3 leading-[1.1] tracking-[-0.01em] transition-colors duration-200 group-hover:text-accent">
-                            {project.name}
-                          </h4>
-                          <p className="mt-1.5 font-mono text-step--2 text-muted">
-                            {project.year}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-pretty">{project.summary}</p>
-                          <p className="mt-3 text-step--1 text-muted text-pretty">
-                            <span className="text-text">
-                              {project.keyDecision.title}.{" "}
-                            </span>
-                            {project.keyDecision.tradeoff}
-                          </p>
-                        </div>
-                      </div>
-                      <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 font-mono text-step--2 text-muted">
-                        {project.stack.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                    </Card>
-                  </Link>
+                  <ProjectCard project={project} />
                 </li>
               ))}
             </ul>
+          </Section>
 
-            {otherProjects.length > 0 ? (
-              <div className="mt-10">
-                <p className="label">Also built</p>
-                <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-                  {otherProjects.map((project) => (
-                    <li key={project.slug}>
-                      <Link href={`/work/${project.slug}`} className="block">
-                        <Card className="h-full p-5">
-                          <h4 className="text-step-1 leading-snug">
-                            {project.name}
-                          </h4>
-                          <p className="mt-1 font-mono text-step--2 text-muted">
-                            {project.year}
-                          </p>
-                          <p className="mt-3 text-step--1 text-pretty">
-                            {project.summary}
-                          </p>
-                        </Card>
-                      </Link>
+          {/* ================= Contact ================= */}
+          <Section id="contact" label="contact">
+            <div className="grid gap-x-10 gap-y-10 lg:grid-cols-2">
+              <div>
+                <h3 className="text-step-6 leading-[1.05] font-bold tracking-[-0.025em] text-text text-balance">
+                  Let&apos;s work together
+                </h3>
+                <p className="mt-6 max-w-[46ch] text-step-0 text-muted text-pretty">
+                  Have an opportunity or project in mind? Send a quick message —
+                  I usually respond within 24 hours.
+                </p>
+
+                <ul className="mt-9 flex flex-col gap-3">
+                  {site.contact.map((item) => (
+                    <li key={item.label}>
+                      <ContactRow item={item} />
                     </li>
                   ))}
                 </ul>
               </div>
-            ) : null}
-          </Section>
 
-          {/* ================= Contact ================= */}
-          <Section id="contact" label="Contact">
-            <Card className="p-7 sm:p-10">
-              <p className="label">Contact</p>
-              <h3 className="mt-4 max-w-[22ch] text-step-4 leading-[1.12] font-bold tracking-[-0.025em] text-balance">
-                Have an opportunity or project in mind?
-              </h3>
-              <p className="mt-5 max-w-[var(--measure)] text-muted text-pretty">
-                Send a message and I will usually reply within a day. I am based
-                in {site.location} and open to{" "}
-                {site.availability?.toLowerCase() ?? "interesting work"}.
-              </p>
-
-              <a
-                href={`mailto:${site.email}`}
-                className="link-rule mt-7 inline-block text-step-2 text-accent"
-              >
-                {site.email}
-              </a>
-
-              <ul className="mt-8 flex flex-wrap gap-x-7 gap-y-3 border-t border-line pt-6">
-                {site.links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      rel="me noopener noreferrer"
-                      target="_blank"
-                      className="link-rule text-step-0"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+              <ContactForm recipient={site.email} />
+            </div>
           </Section>
         </main>
 
-        <footer className="mx-auto max-w-5xl px-[var(--gutter)]">
-          <div className="mt-[var(--section-gap)] border-t border-line py-8">
+        <footer className="mx-auto max-w-6xl px-[var(--gutter)]">
+          <div className="mt-[var(--section-gap)] border-t border-line py-7">
             <p className="label">
               {site.name} — {site.role}, {site.location}
             </p>

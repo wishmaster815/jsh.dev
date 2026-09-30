@@ -82,6 +82,26 @@ export const site: Site = {
   ],
   about,
   experience: [],
+  contact: [
+    {
+      label: "GitHub",
+      href: "https://github.com/wishmaster815",
+      note: "Explore my projects",
+      icon: "github",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/shrivastava-jayesh/",
+      note: "Let's connect",
+      icon: "linkedin",
+    },
+    {
+      label: "Email",
+      href: "mailto:jayeshshrivastava815@gmail.com",
+      note: "Prefer to write directly?",
+      icon: "mail",
+    },
+  ],
 };
 
 export const experience: Experience[] = [
@@ -112,8 +132,15 @@ export const projects: Project[] = [
   {
     slug: "documind",
     name: "DocuMind",
-    summary:
-      "Upload a PDF, ask questions about it, and get answers grounded in the document rather than guessed.",
+    summary: "Document Q&A over your own PDFs",
+    description:
+      "A retrieval pipeline over uploaded PDFs, served through a FastAPI backend and a Next.js interface. Answers are grounded in the document instead of generated from memory, so a question the document cannot answer comes back empty rather than plausible.",
+    features: [
+      "PDF upload with fixed-size overlapping chunking",
+      "Embedding retrieval with Hugging Face models",
+      "Grounded answers via Groq-hosted inference",
+      "Source passages surfaced alongside every answer",
+    ],
     problem:
       "Long documents are unusable when you need one specific fact from them. Keyword search finds the wrong page, and re-reading a report to find one paragraph is slow enough that people give up and ask someone instead.",
     keyDecision: {
@@ -140,8 +167,15 @@ export const projects: Project[] = [
   {
     slug: "birju-ai",
     name: "Birju.AI",
-    summary:
-      "An AI career assistant that generates personalised learning roadmaps, stage-wise quizzes, and counselling reports.",
+    summary: "AI career and learning assistant",
+    description:
+      "Generates a staged learning roadmap for a chosen career path, then produces the quizzes and counselling report for each stage. Built around a sequence rather than a chat box, so a learner always knows what comes next.",
+    features: [
+      "Stage-wise roadmap generated per career path",
+      "Quizzes and reports produced per completed stage",
+      "Next.js frontend over a LangChain backend",
+      "Progress carried across sessions",
+    ],
     problem:
       "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
     keyDecision: {
@@ -171,8 +205,15 @@ export const projects: Project[] = [
   {
     slug: "converso-ai",
     name: "ConversoAI",
-    summary:
-      "A chatbot product for instant, context-aware responses and automated conversations.",
+    summary: "Context-aware chatbot product",
+    description:
+      "A conversational product where replies stay coherent across a long exchange. Conversation state lives server-side, so history survives a reload and the model answers as if it remembers rather than restarting every turn.",
+    features: [
+      "Server-side conversation state per session",
+      "Multi-turn replies that keep their context",
+      "Express and Node.js API with Supabase persistence",
+      "Deployed chat interface in React",
+    ],
     problem:
       "Static FAQ bots give the same answer regardless of what the visitor actually asked, so they deflect simple questions badly and fail the moment a real conversation starts.",
     keyDecision: {
@@ -199,8 +240,15 @@ export const projects: Project[] = [
   {
     slug: "bingebuddy",
     name: "BingeBuddy",
-    summary:
-      "A recommendation tool that finds a film or series from your mood, genre, or favourites.",
+    summary: "Recommendation engine by mood and genre",
+    description:
+      "Finds a film or series from a mood, a genre, or titles you already like. Recommends from content similarity over the catalogue rather than from ratings, so it works without any user history to learn from.",
+    features: [
+      "Cosine similarity over vectorised item metadata",
+      "Cold-start recommendations with no user history",
+      "Synopsis text vectorised alongside structured fields",
+      "Mood and genre as the primary query",
+    ],
     problem:
       "Recommendation lists optimise for titles that already have many ratings, so they keep returning the same popular few. Choosing by mood is how people actually decide, and no catalogue search supports it.",
     keyDecision: {
@@ -230,7 +278,15 @@ export const projects: Project[] = [
   {
     slug: "brainwave",
     name: "BrainWave",
-    summary: "An open AI chat application, built to learn streaming responses and the state management around them.",
+    summary: "Streaming AI chat app",
+    description:
+      "An open AI chat application built to learn the hard part of chat UX: rendering a response while it is still arriving, and keeping the partial state honest so a truncated answer is never mistaken for a finished one.",
+    features: [
+      "Token-by-token streaming as the response arrives",
+      "Explicit partial and complete response states",
+      "Conversation state held across turns",
+      "React front end over a chat backend",
+    ],
     problem:
       "A way to build a real streaming chat interface end to end, including partial responses and the state that has to survive them.",
     keyDecision: {

@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Sora } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import { Providers, ThemeScript } from "@/components/theme-script";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
+/**
+ * Monospace throughout. The reference is mono-dominant, including headings and
+ * body copy, and that is the character of the design — so there is one family
+ * rather than a display/body pair.
+ */
 const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -44,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${sora.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexMono.variable} h-full antialiased`}
     >
       <head>
         <ThemeScript />

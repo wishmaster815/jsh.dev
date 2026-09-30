@@ -32,13 +32,22 @@ export type Project = {
   name: string;
   /** One line: what it is and what it does. */
   summary: string;
+  /** Longer paragraph shown on the card. */
+  description: string;
+  /** Bullet points of what it actually does. */
+  features: string[];
   /** The problem that existed before this was built. */
   problem: string;
   /** The decision worth defending. */
   keyDecision: Decision;
   stack: string[];
+  /** Shown in the card, capped at three with a "+N" overflow. */
   links: Link[];
-  /** Drives ordering and whether it leads the Projects section. */
+  /**
+   * Screenshot path under /public. Optional: until one is added the card falls
+   * back to a generated panel, so nothing renders as a broken image.
+   */
+  screenshot?: string;
   featured: boolean;
   year: string;
 };
@@ -77,6 +86,14 @@ export type About = {
   practice: { platform: string; href: string }[];
 };
 
+export type ContactLink = {
+  label: string;
+  href: string;
+  /** One line on what the link is for. */
+  note: string;
+  icon: "github" | "linkedin" | "mail";
+};
+
 export type Site = {
   name: string;
   role: string;
@@ -92,4 +109,5 @@ export type Site = {
   stack: StackLayer[];
   about: About;
   experience: Experience[];
+  contact: ContactLink[];
 };
