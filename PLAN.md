@@ -2,9 +2,15 @@
 
 ## Status
 
-**Product direction approved. Design and architecture not yet approved. No application code exists.**
+**Product direction approved. Implementation started.**
 
-Awaiting: `DESIGN.md` → `ARCHITECTURE.md` → `ROADMAP.md`
+Done: product direction, design direction, design system with both themes,
+content schema, home page, case study route.
+
+Not done: real content, `/journal` route, `DESIGN.md`, `ARCHITECTURE.md`,
+`ROADMAP.md`.
+
+Awaiting: the real case study (`PLAN.md` §11 step 1) — this is the blocker.
 
 This supersedes the previous proposal version of this document. The earlier
 "AI-native interactive portfolio" direction was rejected; see

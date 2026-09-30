@@ -14,11 +14,12 @@ import type { Experience, JournalEntry, Project, Site } from "./types";
 
 export const site: Site = {
   name: "Jayesh Shrivastava",
-  role: "Backend and AI systems engineer",
+  role: "Full stack engineer",
   positioning:
-    "I build AI systems, backend infrastructure and the developer tooling around them.",
+    "I build across the stack — interfaces, APIs, and the data and infrastructure underneath.",
+  lead: "Most of my work is in the seam: the layer where an interface meets an API, and an API meets the data it depends on.",
   location: "India",
-  // availability: "Open to backend and AI engineering roles",
+  // availability: "Open to full stack and backend engineering roles",
   summary:
     "Systems thinking over tooling lists. This site is the reasoning, the tradeoffs, and what broke.",
   email: "TODO@example.com",
@@ -29,7 +30,41 @@ export const site: Site = {
   stats: [
     // TODO: replace with real, checkable numbers.
     { label: "Projects shipped", value: "TODO" },
-    { label: "Primary stack", value: "TypeScript / Python" },
+    { label: "Years building", value: "TODO" },
+  ],
+  stack: [
+    {
+      id: "interface",
+      name: "Interface",
+      owns: "What the user touches, and how fast it responds.",
+      built: "TODO — one concrete thing built here.",
+      tools: ["TODO", "TypeScript", "TODO"],
+      depth: 1,
+    },
+    {
+      id: "api",
+      name: "API",
+      owns: "Contracts, validation, auth, and the error paths.",
+      built: "TODO — one concrete thing built here.",
+      tools: ["TODO", "REST", "TODO"],
+      depth: 2,
+    },
+    {
+      id: "data",
+      name: "Data",
+      owns: "Schemas, migrations, queries, and what happens when they are wrong.",
+      built: "TODO — one concrete thing built here.",
+      tools: ["TODO", "SQL", "TODO"],
+      depth: 3,
+    },
+    {
+      id: "systems",
+      name: "Systems",
+      owns: "Deploys, queues, observability, and cost.",
+      built: "TODO — one concrete thing built here.",
+      tools: ["TODO", "Docker", "TODO"],
+      depth: 4,
+    },
   ],
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Reveal } from "@/components/reveal";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { projects } from "@/content/site";
 
@@ -25,11 +26,17 @@ function Block({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mt-12">
-      <h2 className="border-t border-line pt-4 text-step-1 font-normal">
-        {heading}
-      </h2>
-      <div className="mt-5 max-w-[var(--measure)]">{children}</div>
+    <section className="mt-14">
+      <Reveal>
+        <div className="datum" style={{ "--datum": "26%" } as React.CSSProperties} aria-hidden="true">
+          <span className="datum__ticks" />
+          <span className="datum__value" />
+        </div>
+        <h2 className="mt-5 text-step-2 leading-tight font-normal">
+          {heading}
+        </h2>
+        <div className="mt-6 max-w-[var(--measure)]">{children}</div>
+      </Reveal>
     </section>
   );
 }
@@ -43,23 +50,26 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
 
   return (
     <>
+      <div className="field" aria-hidden="true" />
       <SiteHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-[var(--gutter)] pt-16 sm:pt-24">
+
+      <main className="relative z-10 mx-auto w-full max-w-5xl flex-1 px-[var(--gutter)] pt-12 sm:pt-18">
         <Link
           href="/#work"
-          className="font-mono text-step--1 text-muted hover:text-text"
+          className="link-rule font-mono text-step--1 text-muted"
         >
-          Work
+          All work
         </Link>
 
-        <h1 className="mt-6 max-w-[20ch] text-step-5 leading-[1.08] font-normal tracking-[-0.02em] text-balance">
+        <h1 className="mt-6 max-w-[18ch] text-step-6 leading-[0.98] font-normal tracking-[-0.025em] text-balance">
           {project.name}
         </h1>
-        <p className="mt-5 max-w-[var(--measure)] text-step-1 text-muted text-pretty">
+
+        <p className="mt-6 max-w-[var(--measure)] text-step-2 leading-[1.3] text-muted text-pretty">
           {project.summary}
         </p>
 
-        <ul className="mt-8 flex flex-wrap gap-x-4 gap-y-1 font-mono text-step--1 text-muted">
+        <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-mono text-step--1 text-muted">
           {project.stack.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -77,30 +87,45 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
 
         <Block heading="Key decisions">
           <article>
-            <h3 className="text-step-0 leading-snug">{decision.title}</h3>
-            <p className="mt-3 text-pretty">{decision.context}</p>
+            <h3 className="text-step-1 leading-snug">{decision.title}</h3>
+            <p className="mt-4 text-pretty">{decision.context}</p>
 
-            <p className="mt-6 font-mono text-step--1 text-muted">
+            <p className="mt-7 font-mono text-step--2 uppercase tracking-[0.14em] text-muted">
               Options weighed
             </p>
-            <ul className="mt-2 list-disc pl-5 space-y-1">
+            <ul className="mt-3 flex flex-col gap-2">
               {decision.options.map((option) => (
-                <li key={option} className="text-pretty">
+                <li
+                  key={option}
+                  className="flex gap-3 text-step--1 text-pretty"
+                >
+                  <span
+                    className="mt-[0.55em] h-px w-4 shrink-0 bg-line-strong"
+                    aria-hidden="true"
+                  />
                   {option}
                 </li>
               ))}
             </ul>
 
-            <p className="mt-6 text-pretty">
-              <span className="font-mono text-step--1 text-muted">Chosen: </span>
-              {decision.chosen}
-            </p>
-            <p className="mt-3 text-pretty">
-              <span className="font-mono text-step--1 text-muted">
-                Tradeoff accepted:{" "}
-              </span>
-              {decision.tradeoff}
-            </p>
+            <div className="mt-7 grid gap-4 sm:grid-cols-2">
+              <div className="crop bg-surface p-5">
+                <p className="font-mono text-step--2 uppercase tracking-[0.14em] text-muted">
+                  Chosen
+                </p>
+                <p className="mt-2 text-step--1 leading-relaxed text-pretty">
+                  {decision.chosen}
+                </p>
+              </div>
+              <div className="crop bg-surface p-5">
+                <p className="font-mono text-step--2 uppercase tracking-[0.14em] text-muted">
+                  Tradeoff accepted
+                </p>
+                <p className="mt-2 text-step--1 leading-relaxed text-pretty">
+                  {decision.tradeoff}
+                </p>
+              </div>
+            </div>
           </article>
         </Block>
 
@@ -110,11 +135,13 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
         </Block>
 
         <Block heading="Outcome">
-          <dl className="grid gap-x-6 gap-y-6 sm:grid-cols-2">
+          <dl className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
             {project.outcomes.map((outcome) => (
-              <div key={outcome.metric}>
-                <dt className="text-step-3 leading-tight">{outcome.metric}</dt>
-                <dd className="mt-1 text-step--1 text-muted">
+              <div key={outcome.metric} className="crop bg-surface p-5">
+                <dt className="text-step-4 leading-none tracking-[-0.01em]">
+                  {outcome.metric}
+                </dt>
+                <dd className="mt-2 text-step--1 text-muted text-pretty">
                   {outcome.detail}
                 </dd>
               </div>
@@ -124,14 +151,14 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
 
         {project.links.length > 0 ? (
           <Block heading="Source and demo">
-            <ul className="flex flex-wrap gap-4">
+            <ul className="flex flex-wrap gap-x-8 gap-y-3 text-step-0">
               {project.links.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="underline decoration-line underline-offset-4 hover:decoration-accent"
+                    className="link-rule text-accent"
                   >
                     {link.label}
                   </a>
@@ -141,6 +168,7 @@ export default async function CaseStudy(props: PageProps<"/work/[slug]">) {
           </Block>
         ) : null}
       </main>
+
       <SiteFooter />
     </>
   );

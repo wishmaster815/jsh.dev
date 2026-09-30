@@ -41,14 +41,29 @@ npx tsc --noEmit
 
 ## State
 
-Product direction **approved** (`PLAN.md`). Architecture approved in the sense that
-Next.js 16 + TypeScript + Tailwind v4 is now in place. `DESIGN.md`,
-`ARCHITECTURE.md`, and `ROADMAP.md` are still not written.
+**Implementation started.** Next.js 16.3.7 + TypeScript strict + Tailwind v4, git
+initialised.
+
+Built so far: design tokens with both themes, three-state theme control, content
+schema, home page (six sections), `/work/[slug]` case study route.
+
+Not built: `/journal` route, `DESIGN.md`, `ARCHITECTURE.md`, `ROADMAP.md`.
 
 **Content is the open blocker.** `PLAN.md` §11 step 1 requires one real case study
-written by the user before the UI is finished. Placeholder copy in
-`content/` is deliberately marked — replace it. Do not invent project facts:
-metrics, latencies, and outcomes must come from the user.
+written by the user before the UI is finished. `content/site.ts` is deliberately
+full of `TODO` — do not invent project facts. Metrics, latencies and outcomes
+must come from the user, because a fabricated number is worse than a missing one.
+
+## Token model
+
+`--accent` is for text and links on `--bg` (tuned ≥4.5:1 there).
+`--accent-solid` / `--on-accent` are for fills, and are a **separate pair** — a
+light-on-dark accent cannot also carry legible text. Using `--accent` as a
+background fails contrast in dark mode; that bug shipped once already.
+
+`--line` is a decorative hairline at ~1.2:1. That is intentional and is not a
+WCAG 1.4.11 failure, because it is only ever a section divider. Do not reuse it
+for a meaningful control boundary without re-checking contrast.
 
 ## Hard boundaries
 

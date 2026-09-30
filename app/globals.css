@@ -1,95 +1,144 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design tokens — the single source of truth for colour.
+   Sectioned — design tokens
 
-   Both palettes are designed deliberately. Neither is an inversion of the
-   other, and `filter: invert()` must never be used here.
+   The concept: an engineering cross-section. Content sits on a measured field,
+   layers are separated by ticked datum rules, and panels are crop-marked like
+   drawing views. Full-stack work is shown as an actual layered stack, because
+   that is what full-stack means, and listing tools would not argue anything.
+
+   Both palettes are designed independently. Neither is an inversion of the
+   other, and `filter: invert()` must never appear here.
 
    Three states, not two:
      - system (default)  -> no data-theme attribute, media query decides
      - light             -> data-theme="light"
      - dark              -> data-theme="dark"
 
-   `color-scheme` is declared alongside the tokens so that form controls,
-   scrollbars and focus rings inherit the right UA styling. Without it they
-   keep OS defaults and look broken in the opposite mode.
+   `color-scheme` is declared alongside the tokens so form controls, scrollbars
+   and focus rings inherit correct UA styling.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  --bg: #f7f7f5;
+  --bg: #f6f7f8;
   --surface: #ffffff;
-  --text: #17191c;
-  --muted: #5c6068;
-  --line: #e2e3df;
-  /* Text/links on --bg. Tuned for >= 4.5:1 against it. */
-  --accent: #4f46e5;
-  /* Fills only. Always paired with --on-accent; tuned so that pair is >= 4.5:1.
-     Kept separate from --accent because a light-on-dark accent cannot also
-     carry legible text. */
-  --accent-solid: #4f46e5;
+  --raised: #fbfbfc;
+  --text: #14171a;
+  --muted: #565c64;
+  --line: #dfe2e6;
+  /* >= 3:1 against --bg: used for real markers, not just decoration. */
+  --line-strong: #7d858e;
+
+  /* Structural accent. Appears as measurement and edge, not as a floating
+     highlight, so it never reads as the "bright accent on near-black" default. */
+  --accent: #4a45d8;
+  --accent-solid: #4a45d8;
   --on-accent: #ffffff;
+  --accent-wash: #eeedfd;
 
-  /* Type scale — fluid, ~1.25 ratio, tightened at the top for display sizes */
-  --step--1: clamp(0.83rem, 0.81rem + 0.1vw, 0.89rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
-  --step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.42rem);
-  --step-2: clamp(1.44rem, 1.32rem + 0.6vw, 1.78rem);
-  --step-3: clamp(1.73rem, 1.54rem + 0.95vw, 2.22rem);
-  --step-4: clamp(2.07rem, 1.78rem + 1.45vw, 2.78rem);
-  --step-5: clamp(2.49rem, 2.02rem + 2.35vw, 3.48rem);
-  --step-6: clamp(2.99rem, 2.24rem + 3.75vw, 4.35rem);
+  /* The measured field. Deliberately faint. */
+  --grid: #e2e5e9;
+  --tick: #aeb5bd;
 
-  --measure: 68ch;
-  --gutter: clamp(1.25rem, 0.9rem + 1.75vw, 2.5rem);
-  --section-gap: clamp(4.5rem, 3.4rem + 5.5vw, 8rem);
+  /* Layer tones for the stack section: a restrained sequence, not a rainbow. */
+  --layer-1: #14171a;
+  --layer-2: #3d444c;
+  --layer-3: #6b737c;
+  --layer-4: #9aa2ab;
+
+  --step--2: clamp(0.69rem, 0.68rem + 0.05vw, 0.72rem);
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
+  --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.09rem);
+  --step-1: clamp(1.2rem, 1.14rem + 0.3vw, 1.38rem);
+  --step-2: clamp(1.44rem, 1.34rem + 0.5vw, 1.75rem);
+  --step-3: clamp(1.73rem, 1.57rem + 0.8vw, 2.22rem);
+  --step-4: clamp(2.07rem, 1.82rem + 1.25vw, 2.8rem);
+  --step-5: clamp(2.49rem, 2.08rem + 2.05vw, 3.55rem);
+  --step-6: clamp(2.99rem, 2.34rem + 3.25vw, 4.5rem);
+  --step-7: clamp(3.2rem, 2.2rem + 5vw, 6.5rem);
+
+  --measure: 66ch;
+  --gutter: clamp(1.15rem, 0.75rem + 2vw, 2.75rem);
+  --section-gap: clamp(4rem, 2.6rem + 7vw, 8.5rem);
+  --hairline: 1px;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #101215;
-  --surface: #171a1e;
-  --text: #ecedef;
-  --muted: #9ba1aa;
-  --line: #262a2f;
-  --accent: #8b85f5;
-  --accent-solid: #4f46e5;
+  --bg: #12151a;
+  --surface: #181c22;
+  --raised: #1e232a;
+  --text: #edeef1;
+  --muted: #a0a7b1;
+  --line: #282e36;
+  --line-strong: #606975;
+
+  --accent: #8f8af8;
+  --accent-solid: #5a53e0;
   --on-accent: #ffffff;
+  --accent-wash: #1e1f3d;
+
+  --grid: #1d222a;
+  --tick: #454d58;
+
+  --layer-1: #edeef1;
+  --layer-2: #aeb5be;
+  --layer-3: #7b838d;
+  --layer-4: #565e68;
 }
 
-/* System preference applies only while no explicit choice has been stored. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --bg: #101215;
-    --surface: #171a1e;
-    --text: #ecedef;
-    --muted: #9ba1aa;
-    --line: #262a2f;
-    --accent: #8b85f5;
-    --accent-solid: #4f46e5;
+    --bg: #12151a;
+    --surface: #181c22;
+    --raised: #1e232a;
+    --text: #edeef1;
+    --muted: #a0a7b1;
+    --line: #282e36;
+    --line-strong: #606975;
+
+    --accent: #8f8af8;
+    --accent-solid: #5a53e0;
     --on-accent: #ffffff;
+    --accent-wash: #1e1f3d;
+
+    --grid: #1d222a;
+    --tick: #454d58;
+
+    --layer-1: #edeef1;
+    --layer-2: #aeb5be;
+    --layer-3: #7b838d;
+    --layer-4: #565e68;
   }
 }
 
-/* Map tokens onto Tailwind utilities. Components reference these, never hex. */
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-raised: var(--raised);
   --color-text: var(--text);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-solid: var(--accent-solid);
   --color-on-accent: var(--on-accent);
+  --color-accent-wash: var(--accent-wash);
+  --color-layer-1: var(--layer-1);
+  --color-layer-2: var(--layer-2);
+  --color-layer-3: var(--layer-3);
+  --color-layer-4: var(--layer-4);
 
   --font-serif: var(--font-newsreader);
   --font-mono: var(--font-plex-mono);
 
+  --text-step--2: var(--step--2);
   --text-step--1: var(--step--1);
   --text-step-0: var(--step-0);
   --text-step-1: var(--step-1);
@@ -98,7 +147,12 @@
   --text-step-4: var(--step-4);
   --text-step-5: var(--step-5);
   --text-step-6: var(--step-6);
+  --text-step-7: var(--step-7);
 }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 * {
   border-color: var(--line);
@@ -112,17 +166,17 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-newsreader), Georgia, serif;
+  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
   font-size: var(--step-0);
-  line-height: 1.6;
+  line-height: 1.62;
   text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
 }
 
-/* Focus is always visible and never removed. */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 ::selection {
@@ -130,15 +184,241 @@ body {
   color: var(--on-accent);
 }
 
+/* ==========================================================================
+   The measured field
+
+   Structure is information. A rule here is a datum with tick marks, not a
+   newspaper column divider, and the grid is a surface the content sits on.
+   ========================================================================== */
+
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--grid) 0 var(--hairline),
+      transparent var(--hairline) 92px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--grid) 0 var(--hairline),
+      transparent var(--hairline) 92px
+    );
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 62%);
+}
+
+@media (prefers-reduced-data: reduce) {
+  .field {
+    display: none;
+  }
+}
+
+/* Datum rule: a hairline carrying measurement ticks, with the accent running
+   under it as the measured value. The tick row draws in once on scroll. */
+.datum {
+  position: relative;
+  height: 8px;
+}
+
+.datum__ticks {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 5px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--tick) 0 var(--hairline),
+    transparent var(--hairline) 12px
+  );
+  transform-origin: left center;
+}
+
+.datum__value {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: var(--datum, 40%);
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+/* Crop marks: corners of a drawing view. */
+.crop {
+  position: relative;
+}
+
+.crop::before,
+.crop::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--accent);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.crop::before {
+  top: 0;
+  left: 0;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+  transform: translate(-2px, -2px);
+}
+
+.crop::after {
+  right: 0;
+  bottom: 0;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+  transform: translate(2px, 2px);
+}
+
+.crop:hover::before,
+.crop:focus-within::before,
+.crop:hover::after,
+.crop:focus-within::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Micro-animations
+
+   Three coherent moments, not scattered effects:
+     1. one orchestrated page-load sequence in the hero
+     2. one scroll moment: the datum rule for each section draws in
+     3. motion that answers a user action: hover, focus, theme change
+
+   Fade-and-slide-up on every section is deliberately absent.
+   ========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes crop-in {
+  from {
+    opacity: 0;
+    transform: translate(4px, 4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes tick-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* 1. Page-load orchestration, staggered. Runs once. */
+.enter {
+  opacity: 0;
+  animation: rise 620ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+
+.enter-1 {
+  animation-delay: 60ms;
+}
+.enter-2 {
+  animation-delay: 170ms;
+}
+.enter-3 {
+  animation-delay: 300ms;
+}
+.enter-4 {
+  animation-delay: 420ms;
+}
+
+.enter-draw {
+  opacity: 0;
+  transform-origin: left center;
+  animation: draw-x 900ms cubic-bezier(0.16, 0.84, 0.44, 1) 340ms forwards;
+}
+
+/* 2. Scroll moment. Gated by a data attribute so it only fires once, and only
+   after the element has actually been seen. */
+.reveal .datum__ticks,
+.reveal .datum__value {
+  transform: scaleX(0);
+}
+
+.reveal[data-shown="true"] .datum__ticks {
+  animation: draw-x 720ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+
+.reveal[data-shown="true"] .datum__value {
+  animation: draw-x 860ms cubic-bezier(0.16, 0.84, 0.44, 1) 90ms forwards;
+}
+
+/* 3. Action-responding motion. */
+.link-rule {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 220ms cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+.link-rule:hover,
+.link-rule:focus-visible {
+  background-size: 100% 1px;
+}
+
+.live-dot {
+  animation: tick-pulse 2.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .enter,
+  .enter-draw {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal .datum__ticks,
+  .reveal .datum__value {
+    transform: scaleX(1);
   }
 }

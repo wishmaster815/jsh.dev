@@ -74,10 +74,32 @@ export type Experience = {
   detail: string;
 };
 
+/**
+ * A layer of the stack.
+ *
+ * Full stack is shown as actual layers with real responsibilities rather than a
+ * list of technologies, because naming tools argues nothing. Each layer states
+ * what it owns and one concrete thing built in it.
+ */
+export type StackLayer = {
+  id: string;
+  name: string;
+  /** What this layer is responsible for. */
+  owns: string;
+  /** Concrete work done here. */
+  built: string;
+  /** Tools, honestly scoped to this layer only. */
+  tools: string[];
+  /** 1 is the outermost layer, 4 the deepest. Drives the edge weight. */
+  depth: 1 | 2 | 3 | 4;
+};
+
 export type Site = {
   name: string;
   role: string;
   positioning: string;
+  /** One sentence, plain, for the hero lead. */
+  lead: string;
   location: string;
   /** Omitted unless genuinely true. See PLAN.md §13. */
   availability?: string;
@@ -86,4 +108,5 @@ export type Site = {
   links: Link[];
   /** Measured stats for the hero metadata grid. Empty until real. */
   stats: { label: string; value: string }[];
+  stack: StackLayer[];
 };
