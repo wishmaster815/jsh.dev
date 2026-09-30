@@ -1,3 +1,4 @@
+import { ProjectMedia } from "./project-media";
 import {
   ExternalIcon,
   GitHubIcon,
@@ -48,26 +49,8 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article className="panel group flex h-full flex-col overflow-hidden transition-colors duration-200 hover:border-line-2">
-      <div className="relative h-44 overflow-hidden border-b border-line sm:h-52">
-        {project.screenshot ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={project.screenshot}
-            alt={`${project.name} interface`}
-            className="size-full object-cover object-top"
-          />
-        ) : (
-          <div
-            className="size-full"
-            style={{
-              backgroundImage:
-                "linear-gradient(150deg, color-mix(in srgb, var(--head) 16%, transparent) 0%, transparent 55%), radial-gradient(120% 90% at 85% 15%, color-mix(in srgb, var(--head-2) 14%, transparent) 0%, transparent 70%)",
-            }}
-          />
-        )}
-
-        {/* Scrim so the title stays readable over any screenshot. */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--panel)] via-[var(--panel)]/25 to-transparent" />
+      <div className="relative border-b border-line">
+        <ProjectMedia name={project.name} src={project.screenshot} />
 
         <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
           <h3 className="text-step-2 text-text">{project.name}</h3>

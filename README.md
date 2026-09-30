@@ -48,9 +48,28 @@ content/
 └── site.ts           content, currently placeholder
 ```
 
-## Content is the blocker
+`content/site.ts` holds all site copy: profile, about, projects, stack, contact.
+Do not invent project facts — metrics, latencies and outcomes must come from
+Jayesh, because a fabricated number is worse than a missing one.
 
-`content/site.ts` is placeholder. The real case study has not been written yet —
-see `PLAN.md` §11 step 1. **Do not invent project facts.** Metrics, latencies and
-outcomes must come from Jayesh. A fabricated number is worse than a missing one,
-because a technical reader who finds one stops trusting the rest of the page.
+## Project screenshots
+
+Each project can show a screenshot at the top of its card. The `screenshot`
+field in `content/site.ts` is already set to these paths:
+
+```text
+public/projects/documind.png
+public/projects/birju-ai.png
+public/projects/converso-ai.png
+public/projects/bingebuddy.png
+public/projects/brainwave.png
+```
+
+Drop the files in and they appear automatically. Until a file exists, the card
+renders a gradient instead — and if a path is set but the file is missing or
+fails to decode, it falls back to the gradient rather than a broken image.
+
+A good screenshot is the part of the app a stranger would recognise in one
+glance: the main screen with real or representative content, not a login page
+or an empty state. Landscape, roughly 16:10, and under 300KB is plenty —
+`next/image` handles the rest.

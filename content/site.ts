@@ -4,7 +4,7 @@ const about: About = {
     heading: "Building AI systems that work beyond the demo.",
     body: [
         "I build production-grade AI and backend systems, along with the interfaces that sit on top of them — from APIs and RAG pipelines to polished, real-world products.",
-        "I’ve completed my B.Tech in Computer Science and gained experience through ML, civic technology, and UI/UX internships, along with remote work for clients across different projects.",
+        "I’ve completed my B.Tech in Computer Science and gained experience through ML and UI/UX internships, along with remote work for clients across different projects.",
         // "I care about building systems that hold up beyond the demo, choosing tools based on the problem, and making engineering decisions I can explain.",
     ],
     practice: [
@@ -20,10 +20,8 @@ const about: About = {
     interests: [
         "Full stack development",
         "AI & LLM applications",
-        "Retrieval and RAG systems",
         "Backend architecture",
         "System design",
-        "Developer tooling",
     ],
 };
 
@@ -42,8 +40,7 @@ export const site: Site = {
      * because a raw download link is the one most likely to break when the
      * share settings change.
      */
-    resume:
-        "https://drive.google.com/file/d/1gTRvXE_1-RSw2Vuy4VYomVW401402E7T/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1gTRvXE_1-RSw2Vuy4VYomVW401402E7T/view?usp=sharing",
     links: [
         { label: "GitHub", href: "https://github.com/wishmaster815" },
         {
@@ -111,8 +108,8 @@ export const site: Site = {
             icon: "linkedin",
         },
         {
-            label: "Email",
-            href: "mailto:jayeshshrivastava815@gmail.com",
+            label: "Twitter",
+            href: "",
             note: "Prefer to write directly?",
             icon: "mail",
         },
@@ -182,6 +179,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/DocuMind-AI",
             },
         ],
+        screenshot: "/projects/documind.png",
         featured: true,
         year: "2025",
     },
@@ -219,6 +217,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/Birju-Frontend-2",
             },
         ],
+        screenshot: "/projects/birju-ai.png",
         featured: true,
         year: "2025",
     },
@@ -256,6 +255,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/ConversoAI_SaaS",
             },
         ],
+        screenshot: "/projects/converso-ai.png",
         featured: true,
         year: "2025",
     },
@@ -293,6 +293,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/movie-recommendation-using-cosine-similarity",
             },
         ],
+        screenshot: "/projects/bingebuddy.png",
         featured: false,
         year: "2024",
     },
@@ -330,6 +331,7 @@ export const projects: Project[] = [
                 href: "https://github.com/wishmaster815/BrainWave-ReactJs",
             },
         ],
+        screenshot: "/projects/brainwave.png",
         featured: false,
         year: "2024",
     },
