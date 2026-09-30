@@ -2,25 +2,17 @@
  * Content schema.
  *
  * The site renders from these types and nothing else. Presentation never
- * hardcodes content, so every section is driven by data and the content can
- * change without touching components.
+ * hardcodes content, so every section is data-driven and the content can change
+ * without touching components.
  *
- * These shapes encode the content rules in PLAN.md §6:
- *   - an Outcome must be quantified
- *   - a Decision must state the tradeoff it accepted
- *   - a case study must name what broke
+ * Outcome metrics and "what broke" were removed at the user's request: for a
+ * fresher portfolio the decision record is the substance, and a projects table
+ * of unverified numbers reads worse than an honest short blurb.
  */
 
 export type Link = {
   label: string;
   href: string;
-};
-
-export type Outcome = {
-  /** The measured result. A number, a scale, or a named failure. */
-  metric: string;
-  /** What the number means, in plain language. */
-  detail: string;
 };
 
 export type Decision = {
@@ -42,64 +34,20 @@ export type Project = {
   summary: string;
   /** The problem that existed before this was built. */
   problem: string;
-  /** The single decision worth surfacing in the 30-second path. */
+  /** The decision worth defending. */
   keyDecision: Decision;
-  /** What broke, and what it taught. Required, not optional. */
-  whatBroke: string;
-  outcomes: Outcome[];
   stack: string[];
-  /** Only real systems. Never a diagram of a concept. */
-  architecture?: string;
   links: Link[];
-  /** Drives ordering on the home page. */
+  /** Drives ordering and whether it leads the Projects section. */
   featured: boolean;
   year: string;
-};
-
-export type JournalEntry = {
-  slug: string;
-  title: string;
-  kind: "decision" | "learning";
-  date: string;
-  /** Honest current state, including what's stuck. */
-  state: string;
-  body: string;
-};
-
-export type Experience = {
-  role: string;
-  org: string;
-  period: string;
-  /** Scope and scale. Numbers where they exist. */
-  detail: string;
-};
-
-export type Education = {
-  degree: string;
-  institution: string;
-  period: string;
-  detail?: string;
-};
-
-/**
- * Practice and problem solving.
- *
- * Carries its own weight for a fresher: LeetCode and GeeksforGeeks profiles are
- * checkable evidence of consistency, which a reader can verify rather than take
- * on trust.
- */
-export type Practice = {
-  platform: string;
-  href: string;
-  detail: string;
 };
 
 /**
  * A layer of the stack.
  *
  * Full stack is shown as actual layers with real responsibilities rather than a
- * list of technologies, because naming tools argues nothing. Each layer states
- * what it owns and one concrete thing built in it.
+ * list of technologies, because naming tools argues nothing.
  */
 export type StackLayer = {
   id: string;
@@ -114,6 +62,21 @@ export type StackLayer = {
   depth: 1 | 2 | 3 | 4;
 };
 
+export type Experience = {
+  role: string;
+  org: string;
+  period: string;
+  detail: string;
+};
+
+export type About = {
+  heading: string;
+  /** Paragraphs, written plainly. No claims that cannot be checked. */
+  body: string[];
+  /** Checkable evidence: practice platforms anyone can open and verify. */
+  practice: { platform: string; href: string }[];
+};
+
 export type Site = {
   name: string;
   role: string;
@@ -121,14 +84,12 @@ export type Site = {
   /** One sentence, plain, for the hero lead. */
   lead: string;
   location: string;
-  /** Omitted unless genuinely true. See PLAN.md §13. */
+  /** Omitted unless genuinely true. */
   availability?: string;
-  summary: string;
   email: string;
   links: Link[];
-  /** Measured stats for the hero metadata grid. Empty until real. */
   stats: { label: string; value: string }[];
   stack: StackLayer[];
-  education: Education[];
-  practice: Practice[];
+  about: About;
+  experience: Experience[];
 };

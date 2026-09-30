@@ -1,61 +1,46 @@
-import type { Experience, JournalEntry, Project, Site } from "./types";
+import type { About, Experience, Project, Site } from "./types";
 
 /**
  * Content, lifted from Portfolio V1 (real facts only — no code reused).
  *
- * STILL PLACEHOLDER in one respect: every project lacks a measured outcome and
- * a written "what broke". PLAN.md §6 requires both, and they cannot be
- * inferred from V1 because V1 never recorded them. They are marked TODO and
- * need Jayesh's own words. Do not invent numbers.
- *
- * Reframed for a fresher-level full stack + AI portfolio: the emphasis is on
- * what was built, what was decided, and what was learned — not on scale.
+ * The about copy is new prose written against V1's record, and needs Jayesh's
+ * review before launch. Anything he has not confirmed is marked TODO rather than
+ * guessed.
  */
+
+const about: About = {
+  heading: "A final-year computer science student building AI-backed applications end to end.",
+  body: [
+    "Most of my work sits where an interface meets the API it depends on. I build the retrieval and chat services on the backend, then the screens people actually use, and I care about both halves holding up under real traffic.",
+    "Three internships have shaped that: machine learning work at CrystalTech Solutions, civic systems at Smart City India, and UI/UX work with clients directly. Each one taught me a different half of the same problem — models that are accurate but slow, systems that work but are unusable, and interfaces that are clear but wrong.",
+    "I use the tools that fit the problem rather than the ones that are trending, and I would rather explain why a decision was made than list what I have used.",
+  ],
+  practice: [
+    { platform: "LeetCode", href: "https://leetcode.com/u/jayeshshrivastava815/" },
+    {
+      platform: "GeeksforGeeks",
+      href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
+    },
+  ],
+};
 
 export const site: Site = {
   name: "Jayesh Shrivastava",
-  role: "Full stack engineer",
+  role: "Full stack developer",
   positioning:
-    "I build across the stack — interfaces, APIs, and the data and infrastructure underneath.",
-  lead: "I work mostly in AI-backed applications: retrieval and chat systems on the backend, and the interfaces that make them usable. My focus is shipping things end to end and understanding why they break.",
+    "I build AI-backed applications across the stack — interfaces, APIs, and the data underneath.",
+  lead: "Retrieval and chat systems on the backend, and the interfaces that make them usable. Most of my work is in the seam between the two.",
   location: "India",
   availability: "Open to full stack and AI engineering roles",
-  summary:
-    "Systems thinking over tooling lists. This site is the reasoning, the tradeoffs, and what broke.",
   email: "jayeshshrivastava815@gmail.com",
   links: [
     { label: "GitHub", href: "https://github.com/wishmaster815" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/shrivastava-jayesh/" },
-    { label: "LeetCode", href: "https://leetcode.com/u/jayeshshrivastava815/" },
-    {
-      label: "GeeksforGeeks",
-      href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
-    },
+    { label: "Resume", href: "/resume.pdf" },
   ],
   stats: [
     { label: "Internships", value: "3" },
-    { label: "Projects shipped", value: "6+" },
-  ],
-  education: [
-    {
-      degree: "TODO — degree, e.g. B.Tech in Computer Science",
-      institution: "TODO — university or college",
-      period: "TODO — graduation year",
-      detail: "TODO — specialisation, honours, or relevant coursework. Optional.",
-    },
-  ],
-  practice: [
-    {
-      platform: "LeetCode",
-      href: "https://leetcode.com/u/jayeshshrivastava815/",
-      detail:
-        "TODO — problem count or current rating. A real number is checkable by anyone who opens the link.",
-    },
-    {
-      platform: "GeeksforGeeks",
-      href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
-      detail: "TODO — problems solved, or a badge worth mentioning.",
-    },
+    { label: "Projects", value: "5" },
   ],
   stack: [
     {
@@ -63,8 +48,8 @@ export const site: Site = {
       name: "Interface",
       owns: "What the user touches, and how fast it responds.",
       built:
-        "Built the animated, responsive portfolio and the BingeBuddy and BrainWave front ends.",
-      tools: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+        "Built the BingeBuddy and BrainWave front ends, and this site — responsive, animated, and usable at phone widths.",
+      tools: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
       depth: 1,
     },
     {
@@ -72,8 +57,8 @@ export const site: Site = {
       name: "API",
       owns: "Contracts, validation, auth, and the error paths.",
       built:
-        "FastAPI services behind DocuMind, ConversoAI and Birju.AI, including the retrieval and chat endpoints.",
-      tools: ["Python", "FastAPI", "LangChain", "Express", "REST"],
+        "FastAPI and Express services behind DocuMind, ConversoAI and Birju.AI, including the retrieval and chat endpoints.",
+      tools: ["Python", "FastAPI", "Node.js", "Express", "LangChain"],
       depth: 2,
     },
     {
@@ -81,193 +66,23 @@ export const site: Site = {
       name: "Data",
       owns: "Schemas, queries, embeddings, and what happens when they are wrong.",
       built:
-        "Vector stores and embeddings for document Q&A, and Supabase schemas and auth across projects.",
+        "Vector stores and embedding pipelines for document Q&A, plus Supabase schemas and auth across projects.",
       tools: ["Supabase", "MongoDB", "Firebase", "Hugging Face"],
       depth: 3,
     },
     {
       id: "systems",
       name: "Systems",
-      owns: "Deploys, model choice, and cost per request.",
+      owns: "Deploys, model choice, and what a request costs.",
       built:
-        "Deployment on Vercel, and a shift to Groq-hosted inference to keep per-request cost workable.",
-      tools: ["Vercel", "Groq", "Git", "GitHub Actions"],
+        "Deployment on Vercel and Render, and a move to Groq-hosted inference to keep per-request cost workable.",
+      tools: ["Vercel", "Render", "Groq", "Git", "Docker"],
       depth: 4,
     },
   ],
+  about,
+  experience: [],
 };
-
-export const projects: Project[] = [
-  {
-    slug: "documind",
-    name: "DocuMind",
-    summary:
-      "Upload a PDF, ask questions about it, get answers grounded in the document.",
-    problem:
-      "Long documents are unusable when you need one specific fact from them. Search finds keywords, not meaning, and re-reading a 60-page report to find one paragraph is slow enough that people give up.",
-    keyDecision: {
-      title: "Chunking strategy, and accepting retrieval noise",
-      context:
-        "Answer quality collapsed on long PDFs: single large chunks lost the surrounding context the answer needed, while very small chunks retrieved fragments with no meaning on their own.",
-      options: [
-        "One chunk per document, relying on the model to read it all",
-        "Fixed-size chunks with overlap, retrieved by embedding similarity",
-        "Smaller chunks plus a reranking pass to recover precision",
-      ],
-      chosen:
-        "Fixed-size overlapping chunks retrieved by embedding similarity, which kept the implementation understandable while fixing the worst failures.",
-      tradeoff:
-        "Retrieval still returns loosely related passages often enough to need a rerank step. I traded accuracy for a system I could actually debug, and the remaining errors are the most obvious thing left to improve.",
-    },
-    whatBroke:
-      "TODO — Jayesh: what actually failed during this build? Chunks that cut a sentence in half mid-answer is a real one, but write what happened, not what could happen.",
-    outcomes: [
-      {
-        metric: "TODO",
-        detail: "TODO — a real number: documents tested, answer accuracy, or response time. Leave blank rather than guess.",
-      },
-    ],
-    stack: ["Python", "FastAPI", "LangChain", "Groq", "Hugging Face", "Next.js"],
-    links: [
-      { label: "Source", href: "https://github.com/wishmaster815/DocuMind-AI" },
-    ],
-    featured: true,
-    year: "2025",
-  },
-  {
-    slug: "birju-ai",
-    name: "Birju.AI",
-    summary:
-      "An AI career and learning assistant that generates personalised roadmaps, stage-wise quizzes, and counselling reports.",
-    problem:
-      "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon unstructured learning plans within weeks because nothing tells them what to do next.",
-    keyDecision: {
-      title: "Generating a staged plan instead of a single answer",
-      context:
-        "A chat interface answers the question you happen to ask. Learners need the opposite: a sequence, where each stage depends on the last and the next step is always defined.",
-      options: [
-        "A chatbot that answers whatever is asked",
-        "A one-shot generated roadmap with no follow-up",
-        "A staged plan where each stage produces the quizzes and unlocks the next",
-      ],
-      chosen:
-        "A staged roadmap, so the assistant has a spine to reason against rather than answering each prompt in isolation.",
-      tradeoff:
-        "The plan is only as good as the assessment that generated it, and a weak self-assessment produces a confidently wrong roadmap. Making the stages explicit made that failure visible instead of hiding it behind a chat log.",
-    },
-    whatBroke:
-      "TODO — Jayesh: what went wrong here? Roadmaps drifting from the learner's actual level is a strong candidate.",
-    outcomes: [
-      {
-        metric: "TODO",
-        detail: "TODO — users, quizzes generated, or completion rate. Real numbers only.",
-      },
-    ],
-    stack: ["Next.js", "LangChain", "Python", "OpenAI", "REST"],
-    links: [
-      { label: "Frontend", href: "https://github.com/wishmaster815/Birju-Frontend-2" },
-    ],
-    featured: true,
-    year: "2025",
-  },
-  {
-    slug: "converso-ai",
-    name: "ConversoAI",
-    summary:
-      "A chatbot product for instant, context-aware responses and automated conversations.",
-    problem:
-      "Static FAQ bots give the same answer regardless of what the visitor actually asked, so they deflect simple questions badly and fail the moment a real conversation starts.",
-    keyDecision: {
-      title: "Keeping conversation state server-side",
-      context:
-        "Multi-turn answers were inconsistent: the model answered as if each message were the first one, because history was not being carried with the request.",
-      options: [
-        "Stateless requests, treating every message independently",
-        "Client-side history only, rebuilt on each page load",
-        "Server-side session state keyed per conversation",
-      ],
-      chosen:
-        "Server-side session state per conversation, so history survives reloads and stays consistent across devices.",
-      tradeoff:
-        "Session state adds a storage dependency and an expiry decision. I traded a stateless, trivially scalable service for answers that actually remembered the conversation.",
-    },
-    whatBroke:
-      "TODO — Jayesh: what failed here? Context windows overflowing on long conversations is worth describing if it happened.",
-    outcomes: [
-      {
-        metric: "TODO",
-        detail: "TODO — a real number. Users, response time, or messages handled.",
-      },
-    ],
-    stack: ["React", "Node.js", "Express", "LangChain", "Supabase"],
-    links: [
-      { label: "Source", href: "https://github.com/wishmaster815/ConversoAI_SaaS" },
-    ],
-    featured: true,
-    year: "2025",
-  },
-  {
-    slug: "bingebuddy",
-    name: "BingeBuddy",
-    summary:
-      "A recommendation tool that finds a film or series from your mood, genre, or favourites.",
-    problem:
-      "Recommendation lists optimise for what already has many ratings, so they keep returning the same popular titles. Choosing by mood is how people actually decide, and no mainstream catalogue search supports that.",
-    keyDecision: {
-      title: "Content-based vectors over a ratings database",
-      context:
-        "Collaborative filtering needs a large user-rating history that a small project does not have, so there was no interaction data to learn from.",
-      options: [
-        "Collaborative filtering on user ratings",
-        "Popularity ranking by genre",
-        "Cosine similarity over vectorised metadata and synopsis text",
-      ],
-      chosen:
-        "Cosine similarity over vectorised item metadata, which works from a cold start with no user history at all.",
-      tradeoff:
-        "Recommendations stay inside the neighbourhood of what was picked, so genuine serendipity is rare. I accepted a narrow, explainable result set over a broad one that could not be justified.",
-    },
-    whatBroke:
-      "TODO — Jayesh: what went wrong? Sparse metadata producing near-identical vectors is a real failure mode worth writing up.",
-    outcomes: [
-      {
-        metric: "TODO",
-        detail: "TODO — catalogue size, or how often the top result was actually watched.",
-      },
-    ],
-    stack: ["Python", "cosine similarity", "Pandas"],
-    links: [
-      {
-        label: "Source",
-        href: "https://github.com/wishmaster815/movie-recommendation-using-cosine-similarity",
-      },
-    ],
-    featured: false,
-    year: "2024",
-  },
-  {
-    slug: "brainwave",
-    name: "BrainWave",
-    summary: "An open AI chat application built as a front-end exercise.",
-    problem:
-      "Mostly a way to build a real streaming chat interface end to end, including partial responses and the state management that goes with them.",
-    keyDecision: {
-      title: "TODO — Jayesh: name the one decision here worth defending.",
-      context: "TODO",
-      options: ["TODO", "TODO"],
-      chosen: "TODO",
-      tradeoff: "TODO",
-    },
-    whatBroke: "TODO",
-    outcomes: [{ metric: "TODO", detail: "TODO — or delete this entry." }],
-    stack: ["React", "JavaScript"],
-    links: [
-      { label: "Source", href: "https://github.com/wishmaster815/BrainWave-ReactJs" },
-    ],
-    featured: false,
-    year: "2024",
-  },
-];
 
 export const experience: Experience[] = [
   {
@@ -293,18 +108,152 @@ export const experience: Experience[] = [
   },
 ];
 
-export const journal: JournalEntry[] = [
+export const projects: Project[] = [
   {
-    slug: "genai-systems",
-    title: "Going deeper on generative AI systems",
-    kind: "learning",
-    date: "2026",
-    state:
-      "Building on the retrieval work in DocuMind and Birju.AI, focusing on evaluation and cost rather than new frameworks.",
-    body: "",
+    slug: "documind",
+    name: "DocuMind",
+    summary:
+      "Upload a PDF, ask questions about it, and get answers grounded in the document rather than guessed.",
+    problem:
+      "Long documents are unusable when you need one specific fact from them. Keyword search finds the wrong page, and re-reading a report to find one paragraph is slow enough that people give up and ask someone instead.",
+    keyDecision: {
+      title: "Chunking strategy, and accepting retrieval noise",
+      context:
+        "Answer quality collapsed on long PDFs. Single large chunks lost the surrounding context an answer needed, while very small chunks retrieved fragments with no meaning on their own.",
+      options: [
+        "One chunk per document, relying on the model to read it all",
+        "Fixed-size overlapping chunks retrieved by embedding similarity",
+        "Smaller chunks plus a reranking pass to recover precision",
+      ],
+      chosen:
+        "Fixed-size overlapping chunks retrieved by embedding similarity — it fixed the worst failures while keeping the system debuggable.",
+      tradeoff:
+        "Retrieval still returns loosely related passages often enough to need a rerank step. I traded some accuracy for a system I could actually debug.",
+    },
+    stack: ["Python", "FastAPI", "LangChain", "Groq", "Hugging Face", "Next.js"],
+    links: [
+      { label: "Source", href: "https://github.com/wishmaster815/DocuMind-AI" },
+    ],
+    featured: true,
+    year: "2025",
+  },
+  {
+    slug: "birju-ai",
+    name: "Birju.AI",
+    summary:
+      "An AI career assistant that generates personalised learning roadmaps, stage-wise quizzes, and counselling reports.",
+    problem:
+      "Career guidance for students is either generic advice or a paid counsellor, and most learners abandon an unstructured plan within weeks because nothing tells them what to do next.",
+    keyDecision: {
+      title: "Generating a staged plan instead of answering questions",
+      context:
+        "A chat interface answers whichever question gets asked. Learners need the opposite — a sequence, where each stage depends on the last and the next step is always defined.",
+      options: [
+        "A chatbot that answers whatever is asked",
+        "A one-shot generated roadmap with no follow-up",
+        "A staged plan where each stage produces quizzes and unlocks the next",
+      ],
+      chosen:
+        "A staged roadmap, so the assistant has a spine to reason against instead of answering each prompt in isolation.",
+      tradeoff:
+        "The plan is only as good as the assessment behind it, and a weak self-assessment yields a confidently wrong roadmap. Making the stages explicit exposed that failure instead of hiding it in a chat log.",
+    },
+    stack: ["Next.js", "LangChain", "Python", "OpenAI"],
+    links: [
+      {
+        label: "Frontend",
+        href: "https://github.com/wishmaster815/Birju-Frontend-2",
+      },
+    ],
+    featured: true,
+    year: "2025",
+  },
+  {
+    slug: "converso-ai",
+    name: "ConversoAI",
+    summary:
+      "A chatbot product for instant, context-aware responses and automated conversations.",
+    problem:
+      "Static FAQ bots give the same answer regardless of what the visitor actually asked, so they deflect simple questions badly and fail the moment a real conversation starts.",
+    keyDecision: {
+      title: "Keeping conversation state server-side",
+      context:
+        "Multi-turn answers were inconsistent — the model replied as if every message were the first, because history was not travelling with the request.",
+      options: [
+        "Stateless requests, treating each message independently",
+        "Client-side history only, rebuilt on every page load",
+        "Server-side session state keyed per conversation",
+      ],
+      chosen:
+        "Server-side session state per conversation, so history survives reloads and stays consistent across devices.",
+      tradeoff:
+        "Session state adds a storage dependency and an expiry decision. I traded a stateless, trivially scalable service for answers that actually remembered the conversation.",
+    },
+    stack: ["React", "Node.js", "Express", "LangChain", "Supabase"],
+    links: [
+      { label: "Source", href: "https://github.com/wishmaster815/ConversoAI_SaaS" },
+    ],
+    featured: true,
+    year: "2025",
+  },
+  {
+    slug: "bingebuddy",
+    name: "BingeBuddy",
+    summary:
+      "A recommendation tool that finds a film or series from your mood, genre, or favourites.",
+    problem:
+      "Recommendation lists optimise for titles that already have many ratings, so they keep returning the same popular few. Choosing by mood is how people actually decide, and no catalogue search supports it.",
+    keyDecision: {
+      title: "Content-based vectors over a ratings database",
+      context:
+        "Collaborative filtering needs a large user-rating history that a project this size does not have, so there was no interaction data to learn from.",
+      options: [
+        "Collaborative filtering on user ratings",
+        "Popularity ranking by genre",
+        "Cosine similarity over vectorised metadata and synopsis text",
+      ],
+      chosen:
+        "Cosine similarity over vectorised item metadata, which works from a cold start with no user history at all.",
+      tradeoff:
+        "Results stay in the neighbourhood of what was picked, so genuine serendipity is rare. I accepted a narrow, explainable set over a broad one I could not justify.",
+    },
+    stack: ["Python", "Pandas", "cosine similarity"],
+    links: [
+      {
+        label: "Source",
+        href: "https://github.com/wishmaster815/movie-recommendation-using-cosine-similarity",
+      },
+    ],
+    featured: false,
+    year: "2024",
+  },
+  {
+    slug: "brainwave",
+    name: "BrainWave",
+    summary: "An open AI chat application, built to learn streaming responses and the state management around them.",
+    problem:
+      "A way to build a real streaming chat interface end to end, including partial responses and the state that has to survive them.",
+    keyDecision: {
+      title: "Rendering tokens as they arrive",
+      context:
+        "Waiting for a complete response before rendering made the app feel broken on anything longer than a sentence, with no feedback while it worked.",
+      options: [
+        "Wait for the full response, then render",
+        "Poll for partial output",
+        "Stream the response and append tokens as they land",
+      ],
+      chosen: "Streaming the response and appending tokens as they arrive.",
+      tradeoff:
+        "Partial output has to be handled honestly — a truncated answer that looks complete is worse than a spinner, so the streaming state is explicit rather than implied.",
+    },
+    stack: ["React", "JavaScript"],
+    links: [
+      { label: "Source", href: "https://github.com/wishmaster815/BrainWave-ReactJs" },
+    ],
+    featured: false,
+    year: "2024",
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
-
-export const extraProjects = projects.filter((p) => !p.featured);
+export const featuredProjects = projects.filter((p) => p.featured);
+export const otherProjects = projects.filter((p) => !p.featured);

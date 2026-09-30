@@ -3,14 +3,14 @@
 import { useTheme, type Theme } from "./theme-provider";
 
 /**
- * Compact three-state control. Rendered as a radio group so the three options are
- * announced correctly and reachable by keyboard, rather than as a bare toggle
- * that would discard the system option.
+ * Three-state control. Rendered as buttons with aria-pressed so each option is
+ * announced and reachable by keyboard, rather than as a bare toggle that would
+ * discard the system option entirely.
  */
-const OPTIONS: { value: Theme; label: string }[] = [
-  { value: "light", label: "Lt" },
-  { value: "system", label: "Au" },
-  { value: "dark", label: "Dk" },
+const OPTIONS: { value: Theme; label: string; title: string }[] = [
+  { value: "light", label: "Lt", title: "Light" },
+  { value: "system", label: "Au", title: "Match system" },
+  { value: "dark", label: "Dk", title: "Dark" },
 ];
 
 export function ThemeToggle() {
@@ -27,7 +27,7 @@ export function ThemeToggle() {
             type="button"
             onClick={() => setTheme(option.value)}
             aria-pressed={active}
-            title={option.label === "Au" ? "Match system" : option.label === "Lt" ? "Light" : "Dark"}
+            title={option.title}
             className={`label px-1.5 py-0.5 transition-colors ${
               active ? "text-accent" : "hover:text-text"
             }`}

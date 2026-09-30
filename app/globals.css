@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Sectioned — design tokens
+   Tokens
 
-   The concept: an engineering cross-section. Content sits on a measured field,
-   layers are separated by ticked datum rules, and panels are crop-marked like
-   drawing views. Full-stack work is shown as an actual layered stack, because
-   that is what full-stack means, and listing tools would not argue anything.
-
-   Both palettes are designed independently. Neither is an inversion of the
-   other, and `filter: invert()` must never appear here.
+   Near-black ground with a teal-to-green accent range. The two accents are
+   doing different jobs and are not interchangeable: teal carries interaction,
+   green marks state. Both palettes are designed independently and neither is an
+   inversion of the other.
 
    Three states, not two:
      - system (default)  -> no data-theme attribute, media query decides
@@ -21,42 +18,27 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --bg: #f4f6f6;
-  --surface: #ffffff;
-  --raised: #eef1f1;
-  --text: #0d1114;
-  --muted: #4e565c;
-  --line: #dbe0e0;
-  /* >= 3:1 against --bg: used for real markers, not just decoration. */
-  --line-strong: #6f787e;
+  --bg: #101318;
+  --bg-deep: #0b0d11;
+  --surface: rgba(16, 19, 24, 0.95);
+  --surface-solid: #101318;
+  --text: #e9edf0;
+  --muted: #80978f;
+  --line: #1e2939;
 
-  /* Deep teal for light mode. The bright mint used in the dark theme cannot be
-     reused here or it disappears on paper, so the two accents are not the same
-     colour: light mode is designed, not token-swapped. */
-  --accent: #0f7a6a;
-  --accent-solid: #0f7a6a;
-  --on-accent: #ffffff;
-  --accent-wash: #dcf0ec;
+  --accent: #27cbcb;
+  --accent-2: #26d868;
+  --on-accent: #04120f;
+  --ring: rgba(39, 203, 203, 0.4);
 
-  /* The measured field. Deliberately faint. */
-  --grid: #e0e5e5;
-  --tick: #b4bcbc;
-
-  /* Layer tones for the stack section: a restrained sequence, not a rainbow. */
-  --layer-1: #0d1114;
-  --layer-2: #384046;
-  --layer-3: #646d73;
-  --layer-4: #939ba1;
-
-  /* Terminal chrome. Light mode is a light console, not a dark one. */
-  --term-bg: #ffffff;
-  --term-bar: #eef1f1;
-  --term-text: #1b2226;
-  --term-muted: #5a646a;
-  --term-prompt: #0f7a6a;
-  --term-ok: #0f7a6a;
+  /* The gradient that runs through headings and the stack's depth. */
+  --spectrum: linear-gradient(
+    135deg,
+    hsl(182 80% 65%) 0%,
+    hsl(142 70% 60%) 100%
+  );
 
   --step--2: clamp(0.69rem, 0.68rem + 0.05vw, 0.72rem);
   --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
@@ -72,92 +54,70 @@
   --measure: 66ch;
   --gutter: clamp(1.15rem, 0.75rem + 2vw, 2.75rem);
   --section-gap: clamp(4rem, 2.6rem + 7vw, 8.5rem);
-  --hairline: 1px;
+  --radius: 20px;
 }
 
-[data-theme="dark"] {
-  color-scheme: dark;
+[data-theme="light"] {
+  color-scheme: light;
 
-  --bg: #0c0e11;
-  --surface: #14181d;
-  --raised: #1b2027;
-  --text: #eef0f2;
-  --muted: #9aa3ab;
-  --line: #232a31;
-  --line-strong: #656f79;
+  --bg: #f4f7f7;
+  --bg-deep: #e9eeee;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-solid: #ffffff;
+  --text: #0c1216;
+  --muted: #4d5f5c;
+  --line: #d3dedd;
 
-  --accent: #2fd6a8;
-  --accent-solid: #14b389;
-  --on-accent: #04140f;
-  --accent-wash: #0f2a23;
+  /* The teal used on near-black disappears on paper, so light mode uses a
+     deeper teal and a deeper green. Designed, not token-swapped. */
+  --accent: #0d767d;
+  --accent-2: #16794a;
+  --on-accent: #ffffff;
+  --ring: rgba(14, 127, 134, 0.35);
 
-  --grid: #171c21;
-  --tick: #3c454e;
-
-  --layer-1: #eef0f2;
-  --layer-2: #a9b2ba;
-  --layer-3: #78818a;
-  --layer-4: #545d66;
-
-  /* Dark console: a shade above the page so the window reads as a surface. */
-  --term-bg: #14181d;
-  --term-bar: #1b2027;
-  --term-text: #dde2e6;
-  --term-muted: #8b949c;
-  --term-prompt: #2fd6a8;
-  --term-ok: #2fd6a8;
+  --spectrum: linear-gradient(
+    135deg,
+    hsl(186 72% 32%) 0%,
+    hsl(154 58% 30%) 100%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
 
-    --bg: #0c0e11;
-    --surface: #14181d;
-    --raised: #1b2027;
-    --text: #eef0f2;
-    --muted: #9aa3ab;
-    --line: #232a31;
-    --line-strong: #656f79;
+    --bg: #f4f7f7;
+    --bg-deep: #e9eeee;
+    --surface: rgba(255, 255, 255, 0.9);
+    --surface-solid: #ffffff;
+    --text: #0c1216;
+    --muted: #4d5f5c;
+    --line: #d3dedd;
 
-    --accent: #2fd6a8;
-    --accent-solid: #14b389;
-    --on-accent: #04140f;
-    --accent-wash: #0f2a23;
+    --accent: #0d767d;
+    --accent-2: #16794a;
+    --on-accent: #ffffff;
+    --ring: rgba(14, 127, 134, 0.35);
 
-    --grid: #171c21;
-    --tick: #3c454e;
-
-    --layer-1: #eef0f2;
-    --layer-2: #a9b2ba;
-    --layer-3: #78818a;
-    --layer-4: #545d66;
-
-    --term-bg: #14181d;
-    --term-bar: #1b2027;
-    --term-text: #dde2e6;
-    --term-muted: #8b949c;
-    --term-prompt: #2fd6a8;
-    --term-ok: #2fd6a8;
+    --spectrum: linear-gradient(
+      135deg,
+      hsl(186 72% 32%) 0%,
+      hsl(154 58% 30%) 100%
+    );
   }
 }
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
   --color-surface: var(--surface);
-  --color-raised: var(--raised);
+  --color-surface-solid: var(--surface-solid);
   --color-text: var(--text);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
-  --color-accent-solid: var(--accent-solid);
+  --color-accent-2: var(--accent-2);
   --color-on-accent: var(--on-accent);
-  --color-accent-wash: var(--accent-wash);
-  --color-layer-1: var(--layer-1);
-  --color-layer-2: var(--layer-2);
-  --color-layer-3: var(--layer-3);
-  --color-layer-4: var(--layer-4);
 
   --font-sans: var(--font-sora), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
@@ -197,8 +157,17 @@ body {
   font-synthesis-weight: none;
 }
 
-/* Micro-label: the tracked uppercase treatment used for eyebrows, nav and
-   datum captions. Reads as instrumentation rather than as a heading. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
 .label {
   font-family: var(--font-plex-mono), ui-monospace, monospace;
   font-size: var(--step--2);
@@ -207,208 +176,139 @@ body {
   color: var(--muted);
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-::selection {
-  background: var(--accent-solid);
-  color: var(--on-accent);
-}
-
 /* ==========================================================================
-   The measured field
+   Ambient light
 
-   Structure is information. A rule here is a datum with tick marks, not a
-   newspaper column divider, and the grid is a surface the content sits on.
+   A wide teal bloom behind the content plus a fine grain. Both sit at low
+   opacity and never sit behind body copy at readable weight.
    ========================================================================== */
 
-.field {
+.ambient {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      var(--grid) 0 var(--hairline),
-      transparent var(--hairline) 92px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      var(--grid) 0 var(--hairline),
-      transparent var(--hairline) 92px
-    );
-  mask-image: linear-gradient(to bottom, #000 0%, transparent 62%);
+}
+
+.ambient__glow {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 70vh;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    var(--ring) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+}
+
+.ambient__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-data: reduce) {
-  .field {
+  .ambient {
     display: none;
   }
 }
 
-/* Datum rule: a hairline carrying measurement ticks, with the accent running
-   under it as the measured value. The tick row draws in once on scroll. */
-.datum {
+/* ==========================================================================
+   Card
+
+   The spotlight follows the pointer. Set with custom properties on the element
+   so no React state is involved: the handler writes CSS variables directly and
+   nothing re-renders on mouse move.
+   ========================================================================== */
+
+.card {
   position: relative;
-  height: 8px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color 220ms ease,
+    transform 220ms cubic-bezier(0.16, 0.84, 0.44, 1);
 }
 
-.datum__ticks {
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 5px;
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--tick) 0 var(--hairline),
-    transparent var(--hairline) 12px
-  );
-  transform-origin: left center;
-}
-
-.datum__value {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: var(--datum, 40%);
-  background: var(--accent);
-  transform-origin: left center;
-}
-
-/* Crop marks: corners of a drawing view. */
-.crop {
-  position: relative;
-}
-
-.crop::before,
-.crop::after {
+.card::before {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-color: var(--accent);
-  border-style: solid;
-  border-width: 0;
+  inset: 0;
+  z-index: -1;
   opacity: 0;
-  transition: opacity 240ms ease;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 0%),
+    var(--ring),
+    transparent 70%
+  );
+  transition: opacity 260ms ease;
 }
 
-.crop::before {
-  top: 0;
-  left: 0;
-  border-top-width: 1.5px;
-  border-left-width: 1.5px;
-  transform: translate(-2px, -2px);
+.card:hover,
+.card:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  transform: translateY(-2px);
 }
 
-.crop::after {
-  right: 0;
-  bottom: 0;
-  border-right-width: 1.5px;
-  border-bottom-width: 1.5px;
-  transform: translate(2px, 2px);
-}
-
-.crop:hover::before,
-.crop:focus-within::before,
-.crop:hover::after,
-.crop:focus-within::after {
+.card:hover::before,
+.card:focus-within::before {
   opacity: 1;
 }
 
+/* A soft spectral wash at the top edge, so cards read as lit rather than flat. */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--spectrum);
+  opacity: 0.5;
+}
+
 /* ==========================================================================
-   Micro-animations
-
-   Three coherent moments, not scattered effects:
-     1. one orchestrated page-load sequence in the hero
-     2. one scroll moment: the datum rule for each section draws in
-     3. motion that answers a user action: hover, focus, theme change
-
-   Fade-and-slide-up on every section is deliberately absent.
+   Links
    ========================================================================== */
 
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.link-rule {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 220ms cubic-bezier(0.16, 0.84, 0.44, 1);
 }
 
-@keyframes draw-x {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+.link-rule:hover,
+.link-rule:focus-visible {
+  background-size: 100% 1px;
 }
 
-@keyframes crop-in {
-  from {
-    opacity: 0;
-    transform: translate(4px, 4px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+.spectral {
+  background: var(--spectrum);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-@keyframes tick-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.45;
-  }
-}
-
-/* 1. Page-load orchestration, staggered. Runs once. */
-.enter {
-  opacity: 0;
-  animation: rise 620ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
-}
-
-.enter-1 {
-  animation-delay: 60ms;
-}
-.enter-2 {
-  animation-delay: 170ms;
-}
-.enter-3 {
-  animation-delay: 300ms;
-}
-.enter-4 {
-  animation-delay: 420ms;
-}
-
-.enter-draw {
-  opacity: 0;
-  transform-origin: left center;
-  animation: draw-x 900ms cubic-bezier(0.16, 0.84, 0.44, 1) 340ms forwards;
+.live-dot {
+  animation: tick-pulse 2.4s ease-in-out infinite;
 }
 
 /* ==========================================================================
-   Terminal
-
-   A content readout, not a navigation shell. It carries its own token set so the
-   console stays legible in both themes instead of being a dark box dropped into
-   a light page.
+   Console — kept as built. It is the memorable element.
    ========================================================================== */
 
 .term {
-  background: var(--term-bg);
+  background: var(--surface-solid);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -417,7 +317,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 0.9rem;
-  background: var(--term-bar);
+  background: var(--bg-deep);
   border-bottom: 1px solid var(--line);
 }
 
@@ -445,7 +345,7 @@ body {
 .term__title {
   font-family: var(--font-plex-mono), ui-monospace, monospace;
   font-size: var(--step--2);
-  color: var(--term-muted);
+  color: var(--muted);
 }
 
 .term__body {
@@ -453,7 +353,7 @@ body {
   font-family: var(--font-plex-mono), ui-monospace, monospace;
   font-size: var(--step--1);
   line-height: 1.75;
-  color: var(--term-text);
+  color: var(--text);
   /* Long tool lists wrap rather than forcing the console wide on a phone. */
   overflow-wrap: anywhere;
 }
@@ -467,12 +367,12 @@ body {
 }
 
 .term__prompt {
-  color: var(--term-prompt);
+  color: var(--accent);
   user-select: none;
 }
 
 .term__ok {
-  color: var(--term-ok);
+  color: var(--accent-2);
 }
 
 .term__caret {
@@ -481,7 +381,7 @@ body {
   height: 1.05em;
   margin-left: 1px;
   vertical-align: text-bottom;
-  background: var(--term-prompt);
+  background: var(--accent);
   animation: caret-blink 1.05s steps(1, end) infinite;
 }
 
@@ -500,45 +400,50 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .term__caret {
-    animation: none;
+@keyframes tick-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
   }
 }
 
-/* 2. Scroll moment. Gated by a data attribute so it only fires once, and only
-   after the element has actually been seen. */
-.reveal .datum__ticks,
-.reveal .datum__value {
-  transform: scaleX(0);
+/* ==========================================================================
+   Motion
+
+   One orchestrated page-load moment in the hero, plus motion that answers a
+   user action. Nothing animates on its own schedule below the fold.
+   ========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.reveal[data-shown="true"] .datum__ticks {
-  animation: draw-x 720ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+.enter {
+  opacity: 0;
+  animation: rise 620ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
 }
 
-.reveal[data-shown="true"] .datum__value {
-  animation: draw-x 860ms cubic-bezier(0.16, 0.84, 0.44, 1) 90ms forwards;
+.enter-1 {
+  animation-delay: 60ms;
 }
-
-/* 3. Action-responding motion. */
-.link-rule {
-  position: relative;
-  text-decoration: none;
-  background-image: linear-gradient(var(--accent), var(--accent));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size 220ms cubic-bezier(0.16, 0.84, 0.44, 1);
+.enter-2 {
+  animation-delay: 170ms;
 }
-
-.link-rule:hover,
-.link-rule:focus-visible {
-  background-size: 100% 1px;
+.enter-3 {
+  animation-delay: 300ms;
 }
-
-.live-dot {
-  animation: tick-pulse 2.4s ease-in-out infinite;
+.enter-4 {
+  animation-delay: 430ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -554,14 +459,17 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  .enter,
-  .enter-draw {
+  .enter {
     opacity: 1;
     transform: none;
   }
 
-  .reveal .datum__ticks,
-  .reveal .datum__value {
-    transform: scaleX(1);
+  .card:hover,
+  .card:focus-within {
+    transform: none;
+  }
+
+  .term__caret {
+    animation: none;
   }
 }
