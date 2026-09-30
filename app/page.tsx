@@ -110,17 +110,30 @@ export default function Home() {
               <Terminal />
             </div>
 
-            <div className="enter enter-4 mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="enter enter-4 mt-8 flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
                 className="rounded-lg border border-head px-5 py-2.5 text-step-0 text-head transition-colors duration-200 hover:bg-head hover:text-on-head"
               >
                 View Projects
               </a>
-              <a href="#contact" className="link text-step-0 text-muted">
-                Let&apos;s talk
-              </a>
+              {site.resume ? (
+                <a
+                  href={site.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg border border-line px-5 py-2.5 text-step-0 text-muted transition-colors duration-200 hover:border-head hover:text-head"
+                >
+                  View Resume
+                  <ExternalIcon className="size-4" />
+                </a>
+              ) : null}
             </div>
+
+            <p className="enter enter-4 mt-4 max-w-[52ch] text-step--1 text-muted text-pretty">
+              Prefer the short version? The CV covers education, dates and the
+              full project list on one page.
+            </p>
           </section>
 
           {/* ================= About ================= */}
