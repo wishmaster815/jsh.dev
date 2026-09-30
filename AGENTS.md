@@ -39,6 +39,18 @@ npm run lint    # eslint, flat config
 npx tsc --noEmit
 ```
 
+**A `next start` production server will shadow the dev server on port 3000.**
+This has already caused a confusing bug report: a stale `next-server` from an
+older build kept serving after several commits, so a fix looked like it had not
+landed. Before concluding a change "isn't working", check what is actually
+bound to the port:
+
+```bash
+ss -ltnp | grep 3000     # or: ps aux | grep next-server
+```
+
+Kill it and run `npm run dev`. Do not leave a `next start` running.
+
 ## State
 
 **Implementation started.** Next.js 16.3.7 + TypeScript strict + Tailwind v4, git

@@ -23,7 +23,17 @@ export function ProjectMedia({
           src={src}
           alt={`${name} interface`}
           fill
-          sizes="(min-width: 1024px) 44vw, (min-width: 640px) 50vw, 100vw"
+          /*
+            Accurate for this layout, not a guess. Below lg the grid is one
+            column, so the card is the full content width. From lg it is two
+            columns inside a max-w-6xl container, which caps the card at about
+            566px however wide the viewport gets.
+
+            The previous 44vw overstated it badly: at a 1920px viewport that
+            told the browser to fetch a 1080w candidate for a card that only
+            ever renders 566px wide.
+          */
+          sizes="(min-width: 1024px) 580px, calc(100vw - 3.5rem)"
           className="object-cover object-top"
           // The card sits below the fold, so defer the fetch until it is close.
           loading="lazy"
