@@ -5,7 +5,7 @@ const about: About = {
     body: [
         "I build production-grade AI and backend systems, along with the interfaces that sit on top of them — from APIs and RAG pipelines to polished, real-world products.",
         "I’ve completed my B.Tech in Computer Science and gained experience through ML, civic technology, and UI/UX internships, along with remote work for clients across different projects.",
-        "I care about building systems that hold up beyond the demo, choosing tools based on the problem, and making engineering decisions I can explain.",
+        // "I care about building systems that hold up beyond the demo, choosing tools based on the problem, and making engineering decisions I can explain.",
     ],
     practice: [
         {
@@ -16,6 +16,14 @@ const about: About = {
             platform: "GeeksforGeeks",
             href: "https://www.geeksforgeeks.org/user/jayeshshrivzfj5/",
         },
+    ],
+    interests: [
+        "Full stack development",
+        "AI & LLM applications",
+        "Retrieval and RAG systems",
+        "Backend architecture",
+        "System design",
+        "Developer tooling",
     ],
 };
 

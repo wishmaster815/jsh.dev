@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { ContactRow, ProjectCard } from "@/components/project-card";
+import { ExternalIcon } from "@/components/icons";
 import { CopyEmail } from "@/components/copy-email";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress, SECTIONS } from "@/components/scroll-progress";
@@ -137,6 +138,37 @@ export default function Home() {
                       {para}
                     </p>
                   ))}
+                </div>
+
+                {/* Interests, then the resume call to action. */}
+                <div className="mt-9">
+                  <p className="label">Interests</p>
+                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                    {site.about.interests.map((interest) => (
+                      <li
+                        key={interest}
+                        className="flex items-center gap-2 text-step-0 text-muted"
+                      >
+                        <span
+                          className="size-1.5 shrink-0 rounded-full bg-head"
+                          aria-hidden="true"
+                        />
+                        {interest}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {site.resume ? (
+                    <a
+                      href={site.resume}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg border border-line px-5 py-3 text-step-0 text-muted transition-colors duration-200 hover:border-head hover:text-head"
+                    >
+                      View Full Resume
+                      <ExternalIcon className="size-4" />
+                    </a>
+                  ) : null}
                 </div>
               </div>
 

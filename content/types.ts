@@ -84,6 +84,11 @@ export type About = {
   body: string[];
   /** Checkable evidence: practice platforms anyone can open and verify. */
   practice: { platform: string; href: string }[];
+  /**
+   * Subjects of interest. Kept short and specific: a long list reads as filler,
+   * and vague entries like "passionate about technology" say nothing.
+   */
+  interests: string[];
 };
 
 export type ContactLink = {
@@ -110,4 +115,9 @@ export type Site = {
   about: About;
   experience: Experience[];
   contact: ContactLink[];
+  /**
+   * Path to the resume under /public. Omit until the file actually exists —
+   * a dead download link is worse than no button.
+   */
+  resume?: string;
 };
