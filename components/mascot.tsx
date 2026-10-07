@@ -16,8 +16,8 @@ import { Mascot as MascotBase, type MascotProps } from "page-mascot";
  * works; override either to relocate the files.
  */
 export function Mascot({
-  directions = "/mascots/crt-directions.webp",
-  reactions = "/mascots/crt-reactions.webp",
+  directions = "/mascots/cat-directions.webp",
+  reactions = "/mascots/cat-reactions.webp",
   label = "CRT mascot",
   ...props
 }: Partial<MascotProps>) {
