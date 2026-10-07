@@ -10,6 +10,7 @@ import { TechIcon } from "@/components/tech-icon";
 import { Terminal } from "@/components/terminal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { experience, featuredProjects, site } from "@/content/site";
+import { Mascot } from "@/components/mascot";
 
 const EDGE: Record<1 | 2 | 3 | 4, string> = {
   1: "bg-head",
@@ -93,6 +94,16 @@ export default function Home() {
         <main className="mx-auto max-w-6xl px-(--gutter)">
           {/* ================= Hero ================= */}
           <section className="pt-10 sm:pt-14">
+            {/*
+              In the empty right margin rather than inline. It follows the
+              pointer, so it needs to be visible to be worth anything, and
+              placing it beside the headline keeps it clear of the console,
+              which is the element that has to hold the hero.
+            */}
+            <div className="mb-8 hidden justify-end lg:flex">
+              <Mascot size={124} />
+            </div>
+
             <p className="enter enter-1 flex items-center gap-2 text-step--1 text-muted">
               <span className="live-dot inline-block size-1.5 rounded-full bg-ok" />
               {site.availability}
